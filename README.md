@@ -7,7 +7,7 @@ This repository contains materials related to my PhD research, which involves id
 3. The dataset used for the thesis
 4. Slides from presentations
 
-The thesis relies extensively on *corpkit*, a purpose-built Python module, which is available [on GitHub](https://www.github.com/interrogator/corpkit) and [ReadtheDocs](http://corpkit.readthedocs.io).
+The thesis relies extensively on *corpkit*, a purpose-built Python module, which is available via [GitHub](https://www.github.com/interrogator/corpkit) and [ReadtheDocs](http://corpkit.readthedocs.io).
 
 ## Working with Jupyter Notebooks
 

@@ -15,8 +15,8 @@ The *Jupyter Notebooks* in the `./notebooks` directory can be viewed online, or 
 
 The three notebooks correspond to three chapters in the thesis.
 
-1. [Shallow features](https://nbviewer.jupyter.org/github/interrogator/thesis/notebooks/blob/master/shallow-findings.ipynb)
-2. [Mood features](https://nbviewer.jupyter.org/github/interrogator/thesis/notebooks/blob/master/mood-findings.ipynb)
-3. [Transitivity features](https://nbviewer.jupyter.org/github/interrogator/thesis/notebooks/blob/master/transitivity-findings.ipynb)
+1. [Shallow features](https://github.com/interrogator/thesis/blob/master/notebooks/shallow-findings.ipynb)
+2. [Mood features](https://github.com/interrogator/thesis/blob/master/notebooks/mood-findings.ipynb)
+3. [Transitivity features](https://github.com/interrogator/thesis/blob/master/notebooks/transitivity-findings.ipynb)
 
 Tweet me if you need help with anything: [@interro_gator](https://twitter.com/interro_gator)

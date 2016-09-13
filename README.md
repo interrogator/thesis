@@ -7,13 +7,13 @@ This repository contains materials related to my PhD research, which involves id
 3. The dataset used for the thesis
 4. Slides from presentations
 
-The thesis relies extensively on *corpkit*, a purpose-built Python module, which is available via [GitHub](https://www.github.com/interrogator/corpkit) and [ReadtheDocs](http://corpkit.readthedocs.io).
+The thesis relies extensively on *corpkit*, a purpose-built Python module, which is available via [GitHub](https://www.github.com/interrogator/corpkit) and documented at [ReadtheDocs](http://corpkit.readthedocs.io).
 
 ## Working with Jupyter Notebooks
 
-The *Jupyter Notebooks* in the `./notebooks` directory can be viewed online, or downloaded and run locally. If you clone the whole repository, it is possible to manipulate the data and code yourself.
+The *Jupyter Notebooks* in the `notebooks` directory can be viewed online, or downloaded and run locally. If you clone the whole repository, it is possible to unzip the data and run interrogations yourself.
 
-The three notebooks correspond to three chapters in the thesis.
+There are three notebooks, each of which corresponds to a chapter in the thesis:
 
 1. [Shallow features](https://github.com/interrogator/thesis/blob/master/notebooks/shallow-findings.ipynb)
 2. [Mood features](https://github.com/interrogator/thesis/blob/master/notebooks/mood-findings.ipynb)

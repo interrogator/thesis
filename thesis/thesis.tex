@@ -1,0 +1,428 @@
+\documentclass[a4paper,10pt,abstract=on]{scrreprt}
+\addtokomafont{disposition}{\bfseries \merriweather}
+\usepackage[UKenglish]{babel}
+%\usepackage{fullpage} % narrow margins
+\usepackage[top=1.5in, bottom=1.5in, left=1.25in, right=1.25in]{geometry}
+\usepackage{todonotes}
+\usepackage{microtype}
+\usepackage{tocloft}
+\usepackage[toc,page]{appendix}
+\usepackage{url}
+\usepackage[all]{nowidow} % avoid hanging lines
+\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage[light]{merriweather}
+%\renewcommand*\rmdefault{cmdh}
+%\usepackage[T1]{fontenc}
+
+% turn off toc page nums and dots
+%\renewcommand{\cftdot}{}
+%\addtocontents{toc}{\cftpagenumbersoff{part}}
+%\addtocontents{toc}{\cftpagenumbersoff{chapter}}
+%\addtocontents{toc}{\cftpagenumbersoff{section}}
+%\addtocontents{toc}{\cftpagenumbersoff{subsection}}
+%\addtocontents{toc}{\cftpagenumbersoff{subsubsection}}
+\usepackage{lineno} % used in genre
+\usepackage{verbatimbox}
+% Table float box with bottom caption, box width adjusted to content
+\usepackage{floatrow}
+\newfloatcommand{capbtabbox}{table}[][\FBwidth]
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{setspace} 
+\usepackage{enumitem}
+
+% break hyphenate words
+\usepackage{hyphenat}
+\hyphenpenalty=750
+
+%\usepackage{listings}
+%\lstset{breaklines=true}
+\setitemize{itemsep=-0.5em}
+\setenumerate{itemsep=-0.5em}
+
+% change table 1.4.:
+\usepackage{caption}
+
+\captionsetup{labelsep=colon}
+\renewcommand*{\figureformat}{\figurename~\thefigure}
+\renewcommand*{\tableformat}{\tablename~\thetable}
+\usepackage{subcaption}
+\usepackage{morefloats}
+\usepackage{minted}
+\usepackage{etoolbox}
+\AtBeginEnvironment{minted}{\onehalfspacing%
+    \fontsize{9}{9}\selectfont}
+\renewcommand{\MintedPygmentize}{/usr/local/bin/pygmentize}
+
+
+\newcommand\textline[4][t]{%
+  \par\smallskip\noindent\parbox[#1]{.333\textwidth}{\raggedright\texttt{+}#2}%
+  \parbox[#1]{.333\textwidth}{\centering#3}%
+  \parbox[#1]{.333\textwidth}{\raggedleft\texttt{#4}}\par\smallskip%
+}
+
+% because merriweather has no textsc, just ue small capital letters
+\newcommand{\sctheme}{T\small{HEME}\normalsize}
+\newcommand{\sctext}[1]{\small\MakeUppercase{#1}\normalsize}
+% make texttt a bit bigger
+%\newcommand{\textt}[1]{\large\texttt{#1}\normalsize}
+
+%\usepackage[gobble=auto,rerun=modified]{pythontex}
+\AfterEndPreamble{\def\PYGdefaultZsq{\textquotesingle}} % upquote hack
+% dummy text
+\usepackage{lipsum}
+\usepackage{blindtext}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {-3.25ex \@plus -1ex \@minus -0.2ex}%
+  {0.01pt}%
+  {\normalfont\sectfont\nobreak\size@paragraph}%
+}
+\makeatother
+
+\usepackage{standalone}
+\usepackage{booktabs}
+\usepackage{beramono}
+\usepackage{lscape}
+\usepackage{listings}
+\usepackage{placeins}
+\usepackage{multicol}
+\usepackage{array,multirow,graphicx}
+\usepackage{comment}
+\usepackage{graphics}
+\usepackage{verbatim}
+\newlength\Colsep
+\setlength\Colsep{10pt} 
+
+%\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{3}
+%\setcounter{section}{1}
+
+% appendix corpkit docs
+\usepackage{pdfpages}
+
+\usepackage[totoc=chapter]{enotez}
+\usepackage{tabularx}
+%\renewcommand\thesection{\arabic{section}}
+\usepackage{array}
+%\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+%\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage[hidelinks]{hyperref}
+%\usepackage[tocbib,natbibapa]{apacite}
+%\usepackage[authoryear]{natbib}
+\usepackage{csquotes}
+
+\usepackage[group-separator={,}]{siunitx}
+
+\usepackage[backend=biber,style=apa,apamaxprtauth=7,doi=false,isbn=false,uniquename=false,url=false,bibencoding=utf8]{biblatex}
+\DeclareLanguageMapping{british}{british-apa}
+
+% no notes ??
+\AtEveryBibitem{%
+  \clearfield{note}%
+}
+\usepackage{xparse}
+\usepackage[xindy,acronym,smallcaps,nonumberlist]{glossaries-extra}
+\usepackage{glossary-longragged}
+\usepackage[open]{bookmark}
+
+\addbibresource{../jab18.bib}
+
+% i will stop using this soon.
+% it allows old style citing
+\newcommand{\citeNP}{\cite}
+\renewcommand{\cite}{\parencite}
+
+% make sure there's a comma after and in refs like proper apa
+\AtBeginDocument{\renewcommand\finalandcomma{\addcomma}}
+\AtBeginBibliography{%
+  \renewcommand*{\finalnamedelim}{%
+    \ifthenelse{\value{listcount}>\maxprtauth}
+      {}
+      {\finalandcomma\addspace\&\space}}}
+
+\makeglossaries
+
+\setglossarypreamble[main]{A number of theoretical definitions provided here echo those used in \gls{SFL} generally. Other systemic\hyp{}functional terminology has not been glossed, simply because concise definitions are already available. Readers are directed to Matthiessen, Teruya, \& Lam, 2010 for an overview of key terms. \\ }
+
+% Capitalisation in the thesis adheres to systemic-functional distinctions. Register dimensions are lowercased (field, tenor, mode); systems are written out in small caps (e.g. \sctext{Mood}, \sctext{Transitivity}); clausal constituents are lowercased (participant, process) but their constituents have an initial capital (Subject, Finite, Thing, Event). Participant types have an initial capital (Verbiage, Actor, Goal)
+
+% this is so broken
+%\newcommand{\glsXpageXglsnumberformat}[2]{%
+%                   \linkpagenumber#2%
+%}
+%                  \renewcommand{\glsXpageXhyperbfit}[2]{%
+%                   \textbf{\em\linkpagenumber#2}%
+%                  }
+%                  \newcommand{\linkpagenumber}[3]{\hyperlink{page.#3}{#1#2{#3}}}
+
+\renewcommand{\glsseeitemformat}[1]{Glossary}
+
+\DeclareDocumentCommand{\newdualentry}{O{}D<>{}m m m m m } {
+  \newglossaryentry{gls-#3}{
+    name={#5},
+    text={#5\glsadd{gls-#3}},
+    description={#6},
+    plural={#7},
+    short={#3},
+    #1
+  }
+  \newacronym[see={[]{gls-#3}},#2]{#3}{#4}{#5\glsadd{gls-#3}}
+}
+
+%\setacronymstyle{long-short-desc}
+
+% this extends the altlist 
+\newglossarystyle
+ {glosstyle}% style name
+ {% base it on the "list" style
+   \setglossarystyle{altlist}%
+   \renewcommand*{\glossentry}[2]{%
+     \item[\glsentryitem{##1}%
+          \glstarget{##1}{\glossentryname{##1}}]
+       \ifglshasshort{##1}%
+       { \raggedright \textbf{(\glsentryshort{##1})}\\}{ \raggedright ~\\}%
+       \glossentrydesc{##1}\glspostdescription \\ \raggedleft{##2}}%
+}
+
+\loadglsentries[main]{glossary}
+\loadglsentries[acronym]{abbreviations}
+
+\title{Linguistic change in an online support group}
+\author{~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\Daniel J. McDonald \\ B.A. (Hons)}
+\date{\today~\\~\\School of Languages and Linguistics \& \\ Melbourne Medical School \\ The University of Melbourne \\ Victoria, Australia}
+%\publishers{~\\School of Languages and Linguistics\\The University of Melbourne\\Victoria, Australia}
+
+%\renewcommand{\APACrefatitle}[2]{#1}
+%\renewcommand{\APACrefbtitle}[2]{#1}
+%\renewcommand{\APACrefbtitle}[2]{\Bem{#1}}
+%\renewcommand{\APACrefaetitle}[2]{[#2]}
+%\renewcommand{\APACrefbetitle}[2]{[#2]} % this one is important for italics and stuff. 
+%from memory another may be needed. you mess with a b and c, and the 1 and 2 ... it can be done
+%\renewcommand\bibliographytypesize{\footnotesize}
+%\newcommand{\breakcell}[2][c]{%
+% \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
+% \BCBL is the comma before the last author when there are three or
+% more authors in a citation and in the reference section, as in “(Gill, Murray, &
+% Wright, 1981)” or “Gill, P. E., Murray, W., & Wright, M. H. (1981).” Its default
+% is also a comma, as required by the APA manual,
+%\AtBeginDocument{\renewcommand{\BCBL}{,}}
+
+% stops a koma error related to the toc:
+\usepackage[float=false]{scrhack}
+
+\begin{document} 
+
+\pagenumbering{roman}
+
+\hyphenation{under-lying ling-uistic ling-uistics language forums socia-bility dis-cur-sive pred-icator conc-ord-ancing Lee-uwen Ling-uistics para-digm Clau-ses clau-ses Lang-uage Inter-net comm-un-ities meta-function pres-en-ted}
+\maketitle
+%\thispagestyle{empty}
+\clearpage
+
+\begin{centering}
+~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\~\\Linguistic change in an online support group
+~\\~\\~\\~\\ 
+
+Daniel J. McDonald
+
+\end{centering}
+%\thispagestyle{empty}
+\clearpage
+
+\section*{Declaration}
+
+\doublespacing 
+  
+This thesis contains only original work by the writer, except for the references that have been appropriately acknowledged. Sections of this thesis contain work that has been presented in earlier versions in the following presentations, publications and repositories:
+
+\begin{enumerate}
+    \item McDonald, D., \& Woodward-Kron, R. (2016). Member roles and identities in online support groups: Perspectives from corpus and systemic functional linguistics. Discourse \& Communication, 10(2), 157--175.
+    \item Zinn, J. O. \& McDonald, D. (2015). Discourse\hyp{}semantics of risk in \emph{The New York Times}, 1963--2014: a corpus linguistic approach. Project report, University of  Melbourne, Australia. Available at http://git.io/vZ7yh. \\ DOI: http://doi.org/10.5281/zenodo.228363.
+    \item Zinn, J. O. \& McDonald, D. (2015). Changing Discourses of Risk and Health Risk: A Corpus Analysis of the Usage of Risk Language in \emph{The New York Times}. In Chamberlain, M. (ed.), Medicine, Discourse, Power and Risk. Abingdon: Routledge: 1--30.
+    \item McDonald, D. (2014). Building web-corpora of patients' online mental health communication for mixed-methods investigation. Presented at the International Association of Applied Linguistics (AILA) World Congress, Brisbane, Australia.
+    \item McDonald, D. (2014). Contrasting mood and transitivity choices in new and established members' posts to an online support group. Presented at the Australian Systemic Functional Linguistics Association (ASFLA), Sydney, Australia.
+    \item McDonald, D. (2015). The Influence of medium and culture on language use in an online support group. Interaction Design Lab (IDL) seminar, University of Melbourne. Available at \url{https://youtu.be/baIelu6sERM}
+    \item Lam, M., McDonald, D., Raklao, T., Pun, J., Cheung, G. \& Slade, D. (2015). Applying functional linguistics in exploring healthcare communication. Roundtable. Communication, Medicine \& Ethics (COMET), Hong Kong.
+    \item McDonald, D. (2015). Investigating online healthcare communication using systemic-functional and corpus linguistics. Poster. Communication, Medicine \& Ethics (COMET), Hong Kong.
+    \item McDonald, D. (2015). Using an IPython Notebook to investigate language use in an online support group. Micro-analysis of online Data (MOOD-Z), Z{\"u}rich, Switzerland.
+    \item McDonald, D., Woodward-Kron, R. (2015). Lexicogrammatical and discourse\hyp{}semantic change over the course of membership in an online support group. International Systemic Functional Linguistic Congress, Aachen, Germany.
+    \item Zinn, J. O., McDonald, D. (2015). Discourse\hyp{}semantics of \sctext{risk} in \emph{The New York Times}, 1963--2014: a corpus linguistic approach. International Systemic Functional Congress (ISFC), Aachen, Germany.
+    \item McDonald, D. (2015). \texttt{corpkit}: a new tool for functional linguistics. Presented at the International Research Centre for Communication in Healthcare (IRCCH) Seminar Series. The Hong Kong Polytechnic University, Hong Kong.
+    \item McDonald, D. (2015). Combining functional and computational linguistics to investigate discourse in an online support group for bipolar disorder. Presented at Mahidol University Linguistics Forum, Bangkok, Thailand.
+    \item McDonald, D. (2015). Discursive change over the course of membership in an online support group. Presented at BAAL Health and Science Communication SIG Event: Computer-mediated health communication: Perspectives from ethnography and discourse analysis. Queen Mary University, London, UK.
+    \item McDonald, D. (2015). Language change over the course of membership in an online support group: a corpus linguistic perspective. UCREL Corpus Research Seminar. Lancaster, UK.
+    \item McDonald, D. (2015). Using corpus and systemic functional linguistics to investigate language change in an online support group. Saarland University PhD Colloqium. Saarbr{\"u}cken, Germany.
+    \item McDonald, D. \& Zinn, J. O. (2015). Shifting discourse\hyp{}semantics of risk in US newspapers, 1987--2014. Forum Entwicklung und Anwendung von Sprach-Technologien (FEAST) Seminar. Saarbr{\"u}cken, Germany.
+    \item McDonald, D. \& Rubino, R. (2016). Classifying Risk in News Articles using Grammatically Weighted Topic Models. Machine Translation Departmental Seminar, Saarland Univsersity. Saarbr{\"u}cken, Germany.
+    \item McDonald, D. (2016). \texttt{corpkit}: a tool for functional analysis of parsed and structured corpora. SFB 833 Departmental Seminar. Univeristy of T{\"u}bingen, Germany.
+\end{enumerate}
+
+\clearpage
+
+% add tokeniser info :)
+% ls | xargs cat | sed 's|%.*||' | sed 's|^ *\\.*||' | sort -u | wc -w
+\noindent The length of this thesis, exclusive of tables, references and appendices, is approximately 80,000 words. ~\\~\\
+
+\begin{flushright} \noindent\begin{tabular}{ll} \makebox[2.5in]{\hrulefill} \\ \end{tabular} ~\\ Daniel J. McDonald\\\today\\
+\end{flushright} \clearpage
+
+\doublespacing
+\section*{Acknowledgements}
+
+Thanks to those who made this work possible, including supervisors, colleagues, friends and family. Funding for this research was provided by the University of Melbourne, Saarland University and the Hong Kong Polytechnic University.
+
+% should change to SFB?
+
+\clearpage
+
+
+\begin{abstract}
+
+\noindent Online support groups (OSGs) are popular sources of both health information and social support. Though early research into OSGs highlighted a concern that non\hyp{}expert members may give harmful advice, more recent studies have typically shown that engagement with OSGs can increase consumer satisfaction with the treatment process, enhance wellbeing, and ultimately improve health outcomes. OSGs are well\hyp{}researched within applied linguistics. Qualitative studies have focussed on member roles within OSGs, as well as the ways in which group members discursively construct their identities, especially with respect to their illness. These approaches have generated rich insights into consumer healthcare discourse that can inform strategies for fostering consumer\hyp{}centred care. Qualitative approaches, however, are resource\hyp{}intensive, difficult to reproduce, and limited in terms of generalisability and representativeness. Quantitative and computational approaches are able to overcome these shortcomings, adding transparency, reproducibility, scalability, and reducing the potential for researcher bias. Current computational approaches to consumer healthcare discourse, however, tend to rely on simplified conceptualisations of language, prioritising lexis over grammar, and thus ignoring the central role played by grammar in the meaning\hyp{}making process.
+
+% not sure about first line
+%todo: foreground methods?
+To address current methodological shortcomings in \gls{OSG} discourse research, this thesis presents an interdisciplinary, corpus\hyp{}based investigation of lexicogrammatical and discourse\hyp{}semantic choices made by members over the course of membership in an online bipolar disorder support community. 8.2 million words in over 66,000 posts from approximately 3,500 members were transformed into a metadata\hyp{}rich, grammatically annotated corpus and investigated from a systemic\hyp{}functional linguistic (SFL) perspective using purpose\hyp{}built corpus\slash computational linguistic tools. An analysis of \sctext{Mood} and \sctext{Modality} choices made over ten stages of membership highlights differences in the ways members negotiate role\hyp{}relationships, with changes in Mood Type, Modality and Speech Function reflecting a longitudinal increase in the provision of advice and social support. An analysis of the \sctext{Transitivity} system shows longitudinal changes in the kinds of participants and processes construed by Forum members, as well as changes in how these participants and processes behave lexicogrammatically. The \emph{diagnosis} Event, for example, is represented by newcomers as a process and modified temporally; at later stages of membership, it is more often reconstrued as a participant in discourse, framed in terms of veracity. Longitudinal shifts were also observed in the preferred ways of ascribing\slash attributing bipolar disorder to Forum members: new members use \emph{being} forms (\emph{I'm bipolar)}, while veteran members prefer \emph{having} constructions (\emph{I have bipolar}). 
+
+The thesis has implications for corpus linguistics, systemic\hyp{}functional linguistic theory, and healthcare communication research. For corpus linguistics and corpus\hyp{}assisted discourse studies, the main contribution is \texttt{corpkit}, an open\hyp{}source software tool designed to build and analyse parsed and metadata\hyp{}rich corpora. it is suggested that the developed tools and methods can circumvent theoretically problematic current practices, and increase the accuracy and automatability of the analytical process. For healthcare communication research, the case study demonstrates the importance of expanding the conceptualisation and analysis of the consumer healthcare journey to include intra--consumer communication that occurs outside of hospitals and clinics. The thesis also advances an argument that the emerging field of clinical natural language processing stands to benefit from increased engagement with functional linguistic theory and insights generated within the qualitative paradigm. I argue that combining the insights from functional linguistics and discourse analysis with automated computational workflows is a step toward an important future goal of improvement of consumer health outcomes through analysis of large, digital collections of spoken and written healthcare discourse.
+
+%The case study is also used to advance an argument for the use of computational linguistic and corpus-based approaches as an inexpensive and reliable complement to the increasing body of research focussed on analysing \gls{consumer} health talk and typologising the relationships between the settings in which these health-centred interactions occur.
+
+\end{abstract}
+
+\clearpage
+\onehalfspacing
+\tableofcontents
+\clearpage
+\listoftables
+\clearpage
+\listoffigures
+\clearpage
+
+\doublespacing
+
+\pagenumbering{gobble}
+
+%\part{Context}
+
+\pagenumbering{arabic}
+
+\input{chapters/introduction} % introduction
+
+%\part{Theory and Methods}
+\input{chapters/onlinehealth} 
+\input{chapters/approaches}
+
+%\part{Investigation}
+\input{chapters/casestudy}
+\input{chapters/findings}
+\input{chapters/mood-analysis}
+\input{chapters/transitivity-analysis}
+
+% Discussion and limitations
+\input{chapters/discuss-limit-bp}
+%%\input{chapters/discuss-limit-methods}
+
+%\part{Future Directions}
+\input{chapters/implications}
+
+%%\input{chapters/future-directions}
+\input{chapters/conclusions}
+
+%endnotes, refs, end matter
+
+\clearpage
+\onehalfspacing
+
+\printendnotes
+\doublespacing
+\printbibliography[heading=bibintoc]
+\clearpage
+
+\printglossary[style=glosstyle]
+
+% fix the table formatting for long3col
+\newglossarystyle{customlong3col}{%
+\setglossarystyle{long3col}% 
+\renewenvironment{theglossary}{% 
+  \hspace{2cm}\begin{longtable}{lp{28em}p{4em}}}%
+  {\end{longtable}}%
+}
+
+\renewcommand*{\acronymname}{List of abbreviations}
+\printglossary[type=acronym,style=customlong3col,nogroupskip]
+
+\clearpage
+
+%\part{Appendix}
+
+%\appendix
+
+\begin{appendices}
+\chapter{Jess' first post} \label{appendix:thread}
+
+Below is the \gls{thread} analysed in Chapter \ref{chap:introdata}. It is presented multimodally, in a form similar to its original appearance, but with some identifying details obscured.
+
+\includepdf[pages={-}]{../images/ami.pdf}
+
+\clearpage
+
+\chapter{\texttt{corpkit} documentation} \label{appendix:corpkit}
+
+Overleaf is a manual for the \texttt{corpkit} \gls{API}, automatically generated at the time of printing from the source code and online documentation. The \gls{HTML} version is available at \emph{ReadTheDocs} (\url{http://corpkit.readthedocs.org}). An \texttt{Epub} version can be built by visiting \url{http://readthedocs.org/projects/corpkit/downloads/epub/latest/}. The manual contains a short introduction, followed by a user guide and an \gls{API} reference.
+
+The source code for the module is not reproduced here. It can be found hosted on \href{https://github.com/interrogator/corpkit}{GitHub}. Both source code and documentation are still evolving, and, as they are open-source, may be modified by other authors in the future.
+
+% enable for final
+\includepdf[pages={-}]{corpkitdocs/corpkit.pdf}
+\end{appendices}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Naturally, every manually categorised example could be disambiguated by contextualised reading---but the amount and kind of context needed varied widely.
+
+New/expert status may affect 
+
+To illustrate the point, let us imagine a hypothetical post from a new user, and a reply from a veteran user:
+
+The lexicogrammar of the veteran's post itself tells us too little to determine whether past behaviour is being described, or whether advice is being offered. Reading the post before helps us some, but ambiguity remains, as two questions were asked, and a reply
+
+As readers, we must decode the meaning with respect to our understanding of context of situation and context of culture. In this situation, we can see that the post is made by a veteran member. We know that veterans 
+
+Even the most sophisticated querying of the corpus can only take us so far. We can count the relative frequency of modalisation, and identify which modals are subject to the most change. We can make lists of adjuncts and predicators that pattern with certain functions (\emph{I would never stop hurrying}; \emph{I would highly recommend medication})---but cases can still be imagined where \emph{I would never stop hurrying} is advice, and \emph{I would highly recommend medication} is a recount of habitual past behaviour. The less delicate the lexicogrammatical phenomenon of interest, the greater potential for incongruence or ambiguity. In a sense, this is a given, since the less delicate a phenomenon, the more potential realisations are possible. 
+
+A further issue is whether advice is congruently realised as an imperative or a declarative. Imperatives/commands often carry a sense of high obligation, whereas declaratives simply provide information.
+
+Provided advice is often non-binding, and it is understood that the one seeking advice is free to take or leave what he/she has received.
+
+The extent to which advice is binding is dependent on the role relationships of the individuals: advice to a PhD candidate from his/her thesis examiner is likely to be treated as binding;
+
+A tutor's advice to a classroom of students may be taken up by a few, but such advice given one-on-one during an office hour is much more likely to be seen by the student as obligatory. The inverse holds true, as well: a class of students providing fashion advice to their teacher are not offended if their teacher does not take up their suggestions.
+
+Unequal role relationships between interlocutors shift the realisation of advice, with expertise in the field being discussed being a particularly salient determiner in the role relationship equivalence.
+
+Expertise, in turn, may be realised through life experience, formal qualifications, etc.
+
+%This needs to end up as a system network
+
+

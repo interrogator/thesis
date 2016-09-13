@@ -1,0 +1,251 @@
+%!TEX root = ../thesis.tex
+
+
+\chapter{Implications of the case study}
+
+The previous chapters of the thesis outlined an investigation of language change in a bipolar disorder support community, In this chapter, I explain the implications of the case study. This is followed by a proposed research agenda for computational healthcare communication research, and a brief conclusion.
+
+\section{Implications for corpus-discourse research} \lipsum
+
+The short case study presented here differs from dominant \gls{CADS} methodologies in two key respects. First is the use of tools and practices that remain uncommon, including \emph{parsing}. Second is the meaningful division of a \gls{corpus} based on metadata attributes.
+
+\subsection{Tools and practices} \lipsum
+
+Parsing, though increasingly common within \gls{CADS}, remains the exception, rather than the norm. This is disappointing, as \gls{POS} and grammatical structure annotation have the potential to not only allow more nuanced querying (as in the tallying of subjects of passivised \emph{diagnose} clauses) but to allow the querying of phenomena that cannot be automatically located in an unparsed corpus. The proportion of past/present clauses, for example, can only be very poorly approximated by searching for different verb endings.
+
+Despite the advantages of parsers, however, it must be remembered that parser accuracy may seriously affect the ability to confidently count grammatical features. Non-standard language is poorly parsed, as a rule, and parsers tend to struggle with subject/copula omission---a common feature in the informal, cooperative kinds of texts that comprise the corpus under investigation here \cite{matthiessen_lexicogrammatical_1995}. In this study, the large amount of abbreviations, jargon, and non-standard spelling posed additional problems for the \emph{CoreNLP} annotation suite. Until there are tools for either cleaning/restructuring online text-based conversation or for accurately parsing it, accuracy will continue to be an issue, especially for broader grammatical features such as mood and voice. That said, many efforts are being made to increase the accuracy of parsers for informal language such as that found on Twitter or in SMS messages \cite{gimpel_part--speech_2011}.
+
+%Few corpus linguists---John Sinclair \citeyear<e.g.>{sinclair_trust_2004} being a notable exception---take issue with the use of grammatical annotation in corpus linguistic or \gls{CADS} research. Though corpus annotation does force data to conform to pre-existing, external theories of grammar, and though the potential
+
+ \paragraph{Lemmatisation} is less problematic, and can be performed within popular corpus interrogation GUIs. Essentially, lemmatisation increases the usefulness of query results by allowing the researcher to collapse inflections that are not meaningful in the context of the investigation at hand. If looking to create lists of social actors that appear in a corpus, collapsing nominative and accusative pronouns and singular and plural nouns through lemmatisation may be useful. In some cases, however, lemmatisation can be a hindrance: frequency differences between \emph{I} and \emph{me} could perhaps be used to investigate the extent to which the first person is agent or patient within the experiential content of the corpus. Similarly, though \emph{things} is the plural of \emph{thing}, it carries an additional, general meaning (as in \emph{things will improve}). Optimally, therefore, the researcher should be able to switch easily between the use, non-use and partial use of lemma lists, depending on the benefits of lemmatisation in a given context.
+
+%\paragraph{Topic modelling,} too, is not wholly unproblematic. Topic 13, for example, contained the usernames and nicknames of some veteran members, likely because veterans signed off their posts by writing their name. Jargon terms were also frequent in this topic, as veteran members are more aware of jargon terms than newcomers. Though the increasingly jargonised register of community members is interesting in its own right, this was not the intended job of the topic modeller: \emph{medication} and \emph{meds} are very much the same thing. Similarly, Topics 0 and 21 seemed to contain words relating to social support. Social support, however, is not a major \emph{subtopic} per se, but rather, a common function of veterans' posts. Again, though this provides an insight into longitudinal changes in member roles, it may not necessarily be the kind of insight we were hoping to gain. So long as researchers remain aware of these limitations, however, topic modelling remains a novel way to categorise corpus texts, and to understand corpus composition. Creating subcorpora based on topic modeller output seems an especially promising strategy: with news corpora, for example, this kind of approach could be used to compare the language used in sports reporting, politics reporting, finance reporting, and so forth. \gls{CADS} could even use topic modelling as a means of splitting and balancing very large general corpora.
+
+\subsubsection{Exploitation of available metadata}
+
+The second point of difference between mainstream \gls{CADS} and the case study here is the use of subcorpora and the development of scripts for automatically querying each subcorpus in turn. The common approach of opening large, unstructured files in concordancing GUIs means that inherent differences between subsets of data are quickly lost. In \gls{CMC} contexts especially, where metadata is often automatically embedded within texts, there is little reason to disregard the affordances that metadata may provide. In the case study presented here, metadata made it possible to segment corpus posts by membership stage, and by \sctext{Mallet} topic. As a result, corpus interrogation was useful not only to understand the kinds of language used in the Bipolar Forum, but to understand language use in subsections of the corpus, and the interrelationship between these parts. It must also be noted here that while scripting interrogations to loop over each subcorpus and compile the results is generally a command-line task, it is a very simple one, easily within the grasp even of researchers who have not been trained in command-line scripting.
+
+\subsubsection{Reference corpora and stopword lists}
+
+As noted earlier, a key issue in \gls{CADS} is that keyword generation is often reliant on two fundamentally arbitrary constructs: the balanced reference corpus, and the stopword list. The concept of a balanced corpus is a theoretical ideal only, as there is no objective way to determine how this balancing should be achieved \cite{baker_corpora_2013}. Should popular media texts count for more than conversations between friends? What proportion of language is written and spoken? Moreover, balanced reference corpora in some respects run counter to the epistemological orientation of discourse analysis. The diverse contexts in which texts included in balanced corpora were created must be homogenised in order for the corpus to fulfil its intended purpose. Furthermore, it is exceedingly rare  that researchers engage with the original texts that comprise the reference corpus---often, in fact, researchers do not even have access to these texts.
+
+For the purposes of keyword generation, reference corpora are often combined with stopword lists, which exclude very common words from keywording results. The first issue with stopword lists is that they have no objective criteria. For the most part, these lists simply exclude words from closed word classes, as well as very common nouns. These common words, however, may be potentially illuminating. For example, a stopword list may cause \emph{things} to be excluded from keyword results, despite the fact that concordancing \emph{things} in this exploratory study revealed that the term patterns with the roles and responsibilities of new and veteran members in interesting and contrasting ways. Moreover, approaches to \gls{CADS} that use parsed corpora allow the researcher to restrict search results to certain word classes, eliminating the need for stopwords. As demonstrated in the case study, generating lists of the most common nouns and verbs has much the same effect as keyword generation via reference corpora and stopwords, but avoids the reliance on arbitrary constructs.
+
+\subsection{Addressing tensions between corpus and discourse linguistics} \label{sect:discusstensions}
+
+Methodological innovations presented here can ease some of the epistemological differences between corpus and discourse linguistics noted by \textcite{virtanen_discourse_2009}. First, corpus segmentation can potentially aid corpus-based research into texts as social processes: by creating subcorpora based on membership stages within a community, for example, we can track the evolution of normative values, rather than simply study the products such values have shaped. Second, working with specialised corpora from single domains renders the differing stances on representativeness and generalisability moot: without attempting to generalise results, the findings from \gls{CADS} of \gls{CMC} corpora have useful implications in their own right: in the case study presented here, the participation of over 5700 people in an online community was comprehensively harvested and analysed. Finally, the preservation of HTML during the corpus building process makes recontextualisation fast and accurate: researchers can easily analyse the multimodal, situated texts, in order to avoid the abstraction of lexis and grammar from context. If Widdowson is correct in his assertion that the discourse significance of texts cannot be read off from the decontextualised corpus \citeyear[p.~9]{widdowson_limitations_2000}, the ability to switch from corpus result to contextualised text goes a long way toward ensuring that corpus-based approaches to discourse can satisfy the epistemological demands of the discourse-analytic tradition.
+
+\section{Implications for SFL} \lipsum \lipsum
+
+
+
+\subsection{Problematising the metafunctional divide}
+
+One of the key characteristics of \gls{SFL} is its argument that language is multifunctional. There are interpersonal, ideational and textual meanings, each of which is realised by separate grammatical systems. While Appraisal theory (which in many ways is an extension of \gls{SFL}), has in part evolved to deal with the middle ground between interpersonal negotiation and ideation, Appraisal is limited to how people use language to judge, grade or evaluate. So far unexplored in \gls{SFL} is whether or not experiential representations can perform interpersonal functions. In the hypothetical example below, two speakers instantiate clauses that differ experientially, but are interpersonally more similar:
+
+\begin{verbatim}
+MODERATOR: How old are you all?
+SPEAKER1: I'm 16.
+SPEAKER2: I'm 35.
+\end{verbatim}
+
+\noindent In this example, the two speakers negotiate their statuses within the relationship, but do not perform this through manipulation of Mood and Modality. Instead, each can relate the experiential content to a context in which being older or younger has some bearing on their social standing.
+
+The case study revealed two sites of metafunctional overlap. These are discussed in the sections below.
+
+\subsubsection{Veteran Fields of discourse}
+
+When investigating the ways in which language changes over the course of membership, many different lexicogrammatical features emerge. Many are interpretable via systemic-functional theory, such as changes in Mood Type, Modality, Speech Function, vocative use, etc. At other points, however, changes are experiential: veteran members use more metadiscourse, and use jargonised variants for some of the common participants in the field of discourse; newcomers more commonly discuss the diagnosis event. It is sensible to suggest that experiential choices can be a part of the negotiation of role relationships between speakers.
+
+%The strength of the systemic-functional stance is that it can 
+
+The same field may be spoken about by newcomers and veterans alike. Newcomers, however, may be requesting information about it, while veterans provide information. These distinctions are clear through an analysis of the syntagmatic \sctext{Mood} choices.
+
+In a structured community with hierarchical membership, however, it is possible that the discussion of some fields of discourse is a privilege for more senior contributors, irrespective of the \sctext{Mood} features of the talk. 
+
+
+\subsubsection{Speech function and Verbiage}
+
+Verbal processes, at minimum, involve a Sayer, who is the originator of a semiotic activity (what has been said). The two most common non-obligatory participants are the Receiver (the one construed as responsible for decoding what has been said) and the Verbiage (which represents what has been said, and which is typically a minor clause, potentially beginning with a textual Theme) \cite[p.~151]{halliday1999construing}.
+
+% example
+\begin{quotation}
+I told him to leave me alone
+\end{quotation}
+
+Because verbal processes construe language, the selection of the Event relates to the speech function of the Verbiage: \emph{asking} flags a demand for information; \emph{ordering} flags a command. In this way, we see links between lexicogrammatical selections within \sctext{transitivity} and the semantics of the interpersonal exchange. \textcite{halliday_introduction_2004} acknowledge that verbal processes contain traces of Mood features, this, dividing the lexical realisations of Events into Imperating and Indicating types. The implications of this, however, are not described.
+
+This interplay or overlap between metafunctions happens again within the structure of the Verbiage itself. When the Verbiage is a command (as in the example above), it has no grammatical Subject and is non-Finite, echoing the lack of Mood element in imperative types. When the construed speech is a question or a statement, the Verbiage is made Finite.
+
+The system of \sctext{theme} is also implicated, as there is a connection between the textual theme in the Verbiage and its speech function. The \gls{Theme} can be used to distinguish between declarative and interrogative Mood Types. The three features of Subject, Finite and Theme can be used to recover the Mood and Indicative Type of a Verbiage:
+
+\todo{figure here}
+% System network?
+%- Subject, - Finite : Imperative
+%+ Subject, + Finite, + Textual Theme : Indicative
+%+ Subject, + Finite, - Textual Theme, + WH-theme = WH-interrogative
+%+ Subject, + Finite, + Textual theme (if/whether): interrogative 
+%+ Subject, + Finite, + Textual theme (that): declarative
+%Modality is represented without change.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{../images/verbproc.png}
+\caption{Verbiage structure for six verbal processes}
+\label{fig:sixverproc}
+\end{figure}
+
+Verbal process is a construal of another instance of language, where the interactants and semiotic content are configured as Participants. The Verbiage more specifically, is nested language. As such, it is a site of metafunctional overlap, functioning foremost as a Participant, but also responding to interactional demands.
+
+%\cite[p.~4]{konig_speech_2007}
+%A clear paradigmatic opposition between basic sentence types is sometimes found with em- bedded sentences, particularly of European languages. In such structures the relevant opposi- tion is expressed by different complementizers or the lack thereof (cf. (8)). Note, however, that imperatives cannot be embedded and that there is thus no ‘imperative complementizer’. Such complementizers have no bearing on the speech acts that may be performed by the sen- tence containing them, unless they occur in an independent, non-embedded sentence (cf. (9)).5
+%(8) a. I knew that John did it. (declarative)
+%b. Fred wonders whether/if John did it. (interrogative) c. Fred asked John to help him. (jussive)
+
+\subsubsection{Metafunction overlap}
+
+The two examples below point toward a level of interaction between metafunctions that is yet to be discussed in mainstream \gls{SFL}.
+
+If experiential meaning-making can effect role-relationship negotiation, it is problematic to argue that the Tenor in a text is created solely through \sctext{Mood} and \sctext{Modality} features.
+
+That said, the analysis did not investigate differences in the \sctext{mood} structure of newcomers' use of metadiscourse. It could be the case that when newcomers are instantiating these fields, they 
+
+
+\paragraph{Further research}
+
+Many of these claims could be empirically tested using approaches similar to the one developed for this case study.
+
+A corpus can be segmented along an interpersonal dimension and probed for experiential features.
+
+
+
+\section{Implications for \glsheadfull{HC} research}
+
+The shift toward patient-centred healthcare has resulted in a need to account for language use in the diverse kinds of situations encountered by patients on their journeys through formal healthcare systems \cite{matthiessen_applying_2013,slade_emergency_2008}. As \textcite{harvey_disclosures_2012} notes, corpora of patient communication allow a view into lived experience of those facing health problems that may be very difficult to gain from language produced within formal healthcare institutions or in communication with health professionals. Accordingly, the methods and findings presented here could form a valuable complement to linguistic investigation of the patient journey, sketching out the meanings made in user-maintained communities. As \textcite{virtanen_discourse_2009} explains, though \gls{CMC} is a pragmatic source of data, the use of \gls{CMC} in lieu of offline data due to this practicality is problematic. Accordingly, the case study presented here provides a preliminary glimpse into the potential richness of OSGs as datasets that can work alongside research into health\hyp{}professional--consumer interaction to inform a more sophisticated understanding of healthcare discourse: in the Bipolar Forum, as in formal healthcare institutions, roles and identities of those living with health issues are constant sites of negotiation and change. Integration of findings from online and offline healthcare communication research is therefore timely.
+
+    There is increasing evidence that online support group communication, and healthcare communication more generally, can be linked to health outcomes \cite{mayfield_automating_2014}. A major hurdle, however, is in 
+
+\section{Future directions}
+
+\subsection{Development of new tools}
+
+A key issue in this study has been the attempt to translate, post\hyp{}hoc, concepts from one grammar into another, and to then abstract discourse\hyp{}semantic significance from the sum total of lexicogrammatical patterns uncovered. The case study has shown that this method can yield useful and novel results. That said, while such a method may currently be the state\hyp{}of\hyp{}the\hyp{}art within corpus linguistics, it remains a counter\hyp{}intuitive process. Recent advances in computational linguistics provide more sensible pathways, many of which could readily be incorporated into future linguistic analyses of constributions to online communities, and into toolkits such as \texttt{corpkit}.
+
+\subsubsection{Interpersonal parsing}
+
+One surprising shortcoming in language processing tools is the lack of parsers for mood and modality features in texts. Given the relative simplicity of mood type identification in English (existence and order of Subject\slash Finite), 
+
+That said, within many written registers, interrogatives are identifiable via the appearance of question marks, and imperatives are rare.
+
+More interesting than Mood Types are \emph{speech functions} (or speech acts, in other grammars), where mood type plays an important role. 
+
+To provide an example of a potential functional semantic annotation system, we can use the issue of categorising the functions of \emph{I would} $+$ adjunct constructions.
+
+
+\subsubsection{Semantic annotation}
+
+%The systemic-functional notion of embeddedness of context within text has far-reaching ramifications for computational linguistic workflows.
+
+Functional and semantic annotation is an emerging and promising research interest within computational linguistics and NLP.
+
+Dependency annotation schemes such as Universal Dependencies represent an attempt to parse texts functionally. Theoretically, however, this grammar suffers from internal inconsistencies and conflations of form and function.
+
+Systemic concepts offer a potential solution to many of these inconsistencies. Clear delineation between grammatical subsystems via multilayered annotation would 
+
+Indeed, multilayer annotation is already the norm within the computational side of corpus linguistic research.
+
+
+Machine learning approaches could also identify features that escape the analysts' attention and intuition.
+
+\subsubsection{Prediction} \lipsum
+
+Predictive approaches would also prove extremely useful, especially in the context of providing interventions for contributors to communities.
+
+\subsubsection{Classification and machine learning} \lipsum
+
+Classification models and machine learning could be used in a similar vein, in order to identify crisis messages, harmful advice, and the like.
+
+
+
+\section{Functional-computational healthcare communication research: a research agenda} \lipsum
+
+Together, the synthesis of relevant literature, the findings of the case study and the developed tools provide insights that can be translated into a research agenda for functional-computational healthcare communication research.
+
+\subsection{Summary of the field}
+
+It is increasingly acknowledged that consumers' communication about health can be linked to health outcomes.
+
+% Consumers have reported substantial benefits of online health communication \cite{park_automatically_2015}
+
+% EXAMPLES
+
+``Meanwhile, in the clinical literature, similar work was carried out to recognize mentions of disorders, findings, and treatments (Aronson 2001) as well as certain relationships, such as diseases and their corresponding treatments in order to mine results conveyed across clinical studies(SrinivasanandRindflesch2002). \cite[p.~257]{friedman_natural_2014}''
+
+
+``The massive amounts of texts amassed through clinical care or published in the scientific literature or on the Web can be leveraged to acquire and organize knowledge from the information conveyed in text, and to promote discovery of new phenomena. For instance, the information in patient notes, while not originally entered for discovery purposes, but rather for the care of individual patients, can be processed, aggregated and mined to discover patterns across patients.'' \cite[p.~256]{friedman_natural_2014}
+
+``NLP can support several points in a clinician workflow: when reviewing the patient chart, NLP can be leveraged to aggregate and consolidate information spread across many notes and reports, and to highlight relevant facts about the patient. During the decision-making and actual care phase, information extracted through NLP from the notes can contribute to the decision support systems in the EHR. Finally, when health care professionals are documenting patient information, higher quality notes can be generated with the help of NLP-based methods.'' \cite[p.~256]{friedman_natural_2014}
+
+``For quality and administrative purposes, NLP can signal potential errors, conflicting information, or missing documentation in the chart. For public health administrators, EHR patient information can be monitored for syndromic surveillance through the analysis of ambulatory notes or chief complaints in the emergency room.'' \cite[p.~256]{friedman_natural_2014}
+
+``Finally, NLP can support health consumers and patients looking for information about a particular disease or treatment, through automated question understanding which can then facilitate better access to relevant information, targeted to their information needs, and to their health literacy levels through the analysis of the topics conveyed in a document as well as the vocabulary used in the document.'' \cite[p.~256]{friedman_natural_2014}
+
+\subsection{Semantic parsing}
+
+Links with health outcomes, however, target discourse/pragmatics/semantics of language, rather than lexicogrammar. It is a user's position him/herself as an agent in decision-making processes that may pattern with better outcomes, rather than the user's use of certain pronominal subjects and mental processes.
+
+Accordingly, we want to be able to interrogate the semantics of texts.
+
+Manual annotation is time consuming and expensive, and automatic annotation for speech functions/speech acts doesn't exist.
+
+\subsection{Harnessing state-of-the-art tools} \lipsum
+
+% The methods presented here for interrogating lexicogrammar can be used alongside understanding of functional grammar to locate sites of lexicogrammatical change that may index particular kinds of interpersonal and experiential meanings. Via lexicogrammatical concordancing, clauses/sentences/texts matching criteria can be selected and grouped, with relevant grammatical annotations if these are relevant. By extracting specific instances based on lexicogrammatical features, rather than simply by reading through entire texts, the time associated with manual categorisation is greatly reduced. Employing \gls{SFG} makes this even more accurate.
+
+
+\subsubsection{The addition of machine learning} \lipsum
+
+Machine learning approaches offer accurate, unsupervised classification of units of language. Machine learning involves using hand-coded examples to identify latent patterns that do not necessarily need to be expliticly annotated, either by hand or by parsing. The result is automatically classified data, which in successful cases can match or exceed the accuracy of human coding.
+
+Machine learning has recently demonstrated its value in healthcare communication research.
+
+% % % Using machine learning to study social behavior in clinical conversations, by contrast, is an essentially unexplored area of research \cite[p.~122]{mayfield_automating_2014}
+
+As advocated by \textcite[p.~127]{mayfield_automating_2014}, ML-based approaches are currently viable as cost-effective substituted, or as pilot study data: `Thus, using machine learning as a `pilot' for testing new approaches to data analysis will enable rapid discovery of new directions for research with lowered cost compared to full annotation of entire datasets.'. The authors note that the methods will improve as ML technologies emerge, and especially as more domain-specific features are added into the training data. SFL provides a framework for selecting, and potentially automating, the kinds of domain-specific features that may be suitable.
+
+The toolkit developed during this research project could be extended---thematic annotation of grammatically located concordance lines is possible. With large enough bodies of categorised text, implementing a machine learning model to categorise the remainder of the corpus would be a potentially valuable, bringing the power of ML into the hands of non-computationally oriented corpus linguists.
+
+Machine learning can then be used to extract more instances from the entire corpus, to distinguish between users' roles within the community based on these instances, and so forth.
+
+
+
+% The classification model can then likely be applied to the vast quantities of face-to-face clinical encounters. Online communities, in being more informal and dialogic in nature, provide a linguistic register more comparable to face-to-face interactions.
+
+\subsection{The value of linguistic theory} \lipsum
+
+% The role of SFL
+
+% SFL can be used to develop lexicogrammatical queries that are likely to locate realised instances of semantic patterns.
+
+% A longer term goal would be to use systemic theory more heavily during the parsing stage, by parsing texts with sensitivity to the context of the text. Rather than relying on metadata, however, context can be deduced from lexicogrammar alone: formality can be deduced by sentence and clause length, use of particular pronouns, levels of nominalisation, passivisation, and so on. Parsing could then respond to a the modelled register of the text, with sensitivity to the kinds of incongruence between wording and meaning that are typical of different registers.
+
+Interpersonal meanings have generally been a lower priority in \gls{NLP}, and in medical \gls{NLP} in particular: tasks such as text summarisation and information extraction are rooted in experiential meanings.
+
+Probing of the Mood and Modality systems, accurately annotated, would allow researchers to refocus computational healthcare communication research on interpersonal dimensions of language use, such as the development of professional\slash client role-relationships, or the performance of consumers' emerging lay-expertise.
+
+\subsection{Possible use-cases} \lipsum
+
+\section{Conclusions}
+
+This thesis has provided reliable support for key claims in literature concerning language use and change in online support groups. Throughout the course of membership, users increasingly construe themselves as active participants, partaking in shared-decision making with health professionals and loved ones. In the same way, the role of the illness itself changes, from an attribute to a possession, over which forum contributors can exercise some level of control. The development of expertise is also possible to trace, with increasingly jargonised lexis, and shifting speech functions, from recounting to advising.
+
+The thesis also demonstrates the fact that corpus\slash computational linguistic methods can uncover linguistic phenomena of interest to discourse analysts and medical researchers interested in promoting patient-centred treatment strategies. Research into language use using the methods presented here allows for transparency, reproducibiliyy and scalability, while limiting researcher bias.
+
+The burgeoning computational paradigm in applied linguistic research shows great promise. The case study of this thesis takes advantage of a number of sophisticated tools and methods from computational linguistics and \gls{NLP}, many of which will improve in speed and accuracy in their future iterations. Indeed, parser accuracy has improved over the years in which this thesis was written, and much standardisation has taken place regarding the set of dependency grammar role labels. Given the fact that computational resources will only improve, the methodology presented here has the potential to increase in its explanatory power with little more than rerunning the workflow with newer models.
+
+That said, as proposed in earlier, many of these computational tasks may benefit from awareness of a functional linguistic conceptualisation of the text\slash context relationship. By determining text-type through shallow features, and by annotating deep features in response to the determined text-type, automatic annotation of meanings, alongside wordings, becomes a feasible goal.
+
+
+
+
+

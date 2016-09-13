@@ -1,0 +1,50 @@
+%!TEX root = ../thesis.tex
+
+\chapter{State of the art}
+
+Manual analysis of online support group contributions has demonstrated that discursive phenomena can be linked to health outcomes. Manual analysis, however, scales poorly. When datasets reach a certain size, either data sampling or automatic processing becomes necessary. Sampling decreases the reliabilty of findings, and leaves potentially critical texts unanalysed. In certain applications, such as identification of contributions requiring human intervention, leaving contributions unanalysed is not a viable option. Therefore, automatic methods are needed. 
+
+Though computers approach human levels of reliability for micro-level tasks such as tokenisation and part of speech tagging, more abstract processes such as parsing, and mapping parses to meanings and functions of language, are typically performed better by humans. Though the gap between humans' and computers' performance on semantic annotation is closing, 
+
+As such, it is necessary to provide an account of currently available tools and methods for the task of \textbf{automatic identification and extraction of meaningful \glslink{lexicogrammar}{lexicogrammatical} features from consumer's healthcare communication online}. To do this, I focus first on general NLP technologies, and then on health-specific technologies.
+
+
+\section{Natural language processing}
+
+
+
+
+
+    \subsection{NLP in the health domain}
+
+    % a number of tools have been developed specifically for health nlp
+
+    % dedicated tools were not designed for patient's cmc data, but for clinical notes, etc. Because of this, accuracy of automated procedures is not as high when dealing with user-generated online content \cite{park_automatically_2015}. Key issues are slang, misspellings \cite{smith_patientslikeme_2008}, and colloquial features of OSG language, such as greetings and goodbyes, which are generally absent in the kinds of training data given to health NLP tools.
+
+    % discourse analysis has not been a key aim either
+
+    % for these two reasons, the dedicated tools are not necessarily better than the general ones
+
+    \subsection{NLP for discourse}
+
+    Compared to many NLP tasks, discourse analysis involves a larger unit of analysis, and is centrally concerned with a more abstract stratum of language---discourse-semantics, rather than lexicogrammar. While parsing typically models relationships between words, groups, phrases and clauses, discourse analysis is typically concerned with patterns across clause complexes and texts. Though these patterns are often identified at the stratum of the lexicogrammar, discourse analysts are typically concerned with what these realisations mean and do.
+
+    A major issue in the use of NLP technologies for discourse analysis is that the two fields favour different theories of language and grammars. The most common gramamrs for parsing English are constituency and dependency-based, while discourse analysis favours functional grammars.
+
+    There are points of overlap in the foci of discourse analysis and NLP, however. Pronominal referent tracking takes place across sentence boundaries, and is indeed useful for determining discursive phenomena, such as who is typically presented as actors in particular processes.
+
+    \subsubsection{Discourse annotation}
+
+    Discourse annotation is an increasingly popular task.
+
+    It is striking, however, that discourse annotation is more commonly used in computational linguistics than discourse analysis. 
+
+    Notably lacking are tools for automatically processing interpersonal meanings in texts.
+
+
+
+    \subsection{NLP and online communities}
+
+    % no country for old members
+
+    % igor brigador

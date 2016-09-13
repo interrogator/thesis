@@ -1,0 +1,39 @@
+%!TEX root = ../thesis.tex
+
+\chapter{New tools and methods for corpus linguistics} \label{chap:discuss-method}
+
+In the previous chapter, I addressed Research Question 2, which called for an account of discourse-semantics and register in the Forum.  This chapter addresses Research Question 3, which centres on methodology and tool design. A critical reflection on both is also provided.
+
+
+More specifically, the \texttt{corpkit} tool is designed to improve four main shortcomings in contemporary \gls{CL}\slash \gls{CADS}. First, it works with structured and metadata-rich collections of text. Second, it provides researchers with access to state-of-the-art developments from computational linguistics and NLP. Third, it provides multiple interfaces, each catering to researchers with different levels of familiarity with computational methods. Fourth, it is free and open-source. These four improvements are discussed in detail in the sections below.
+
+\subsection{Exploiting computational developments}
+
+The second important development is in allowing \gls{CL} practitioners to exploit developments from computational linguistics, \gls{NLP}, such as lemmatisation, POS tagging, constituency and dependency parsing, named entity recognition and coreference resolution. As reviewed in Section \ref{sect:cl}, opposition to such processes within \gls{CL} is waning.
+
+A major barrier preventing their use in \gls{CL} so far, however, has been that running them, and manipulating their output, have generally been computer programming tasks.
+
+Because discourse is meaning made beyond the level of the clause, \gls{CADS} is especially likely to benefit from coreference resolution.
+
+The tool demonstrates that \gls{CL} and \gls{CMC} research can engage with emerging tools and methods from computational linguistics and \gls{NLP}.
+
+% as well as general command-line tools.
+
+The tool also takes advantage of non-linguistic modules and libraries. By outsourcing many tasks to well-established, dedicated libraries for visualisation and statistics, for example, the tool can focus on linguistic features, while taking incorporating the open-source state of the art.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%The main function of the tool is to extract information from Stanford CoreNLP parses. Therefore, its usefulness is dependent on both the accuracy of the CoreNLP pipeline and the usefulness of the categories and relationships determined by the parser. In the sections below, I reflect critically on parser accuracy and parser output.

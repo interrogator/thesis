@@ -1,0 +1,617 @@
+%!TEX root = ../thesis.tex
+
+\chapter{New users' contributions to the community}
+
+In the previous chapter, I charted sites of longitudinal change within the lexicogrammar and discourse-semantics of members' contributions to Bipolar Forum. In this chapter, I focus specifically on first contributions to the community. This analysis begins by identifying the characteristic lexicogrammar of first posts. This is followed by qualitative examination of these posts in detail. The SF conceptualisation of genre is used as a basic framework for understanding threads started by newcomers, and containing welcomes from more senior members of the community.
+
+\section{Lexicogrammatical features of first posts}
+
+We can begin an investigation of first contributions by keywording---that is, using a log-likelihood algorithm to locate words that are particularly frequent in the target corpus than in a second, larger, body of text.
+
+As discussed earlier, though keywording is very popular in corpus-discourse research, the process can be epistemologically problematic for a number of reasons. First is the composition of the reference corpus: discourse analysts may be especially attuned to the idea that the construction of an unbiased, balanced, representative corpus of general language use is only a `theoretical ideal'. 
+
+A second major issue is that keywording, in the general sense of the term, is more or less blind to key components of the meaning-making process, such as inflection or part-of-speech. Keywording is popular in large part due to the fact that it can be performed using unannotated text files, and using a simple list of words and their frequencies as a reference corpus. It is an entirely lexical means of identifying the `aboutness' of a text, not quantifying, for example, formality based on levels of passivisation or nominalisation. Without additional processing, all inflections of a given word will be counted separately, leading to (for example) an underrepresentation of irregular verbs in the output.
+
+A related issue is that most common approaches to keywording involve arbitrary lists of `stopwords'---that is, words to be excluded from the final output of the keywording process. Though there are many different stopword lists, non-content words are the primary target of such lists. In almost every case, stopwords are atheoretically derived: researchers perform keywording without stopwords, view the output, and add words that do not seem salient to the list of words to exclude. This is problematic, as it involves researchers' subjective judgements about the usefulness of certain words as keywords to enter into the computational component of the methodology, which is prized for its ability to lend objectivity to applied linguistic research.
+
+These issues are ameliorated by the methods presented here. First, the reference corpus used here is derived from the corpus itself (either its sum total of word frequencies, or the sum total of word frequencies in veteran posts, for example). This avoids the issue of reference corpus balance and composition. Second, keywords can quite easily be calculated for the kinds of lexicogrammatical queries produced in the last chapter: focussing on particular components of the interpersonal and experiential systems, and by performing accurate lemmatisation, we can consider the keyness of nouns and verbs (or, with more delicate querying, the heads of participants and processes) separately. Using this method, we need not worry about building lists of stopwords for automatic exclusion, as the filtering of unuseful terms is performed earlier.
+
+\subsection{Keywording}
+
+\subsubsection{Traditional approach: comparing first posts to the BNC}
+
+\begin{pyverbatim}
+from dictionaries.stopwords import stopwords
+all_words = interrogator(corpus, 'words', 'any')
+k1 = editor(awul.results.ix[0], 'k', 'bnc.p', calc_all = False, threshold = 0)
+k = editor(awul.results.ix[0], 'k', 'bnc.p', skip_entries = stopwords, 
+           calc_all = False, threshold = 0)
+\end{pyverbatim}
+
+\begin{tabular}{lr|lr}
+\toprule
+Without stopwords &  Keyness & With stopwords &   Keyness \\
+\midrule
+i    & 168933.84 & bipolar    & 22816.26 \\
+and  &  87575.70 & meds       & 10634.09 \\
+to   &  82452.59 & depression &  8152.41 \\
+the  &  69220.16 & diagnosed  &  7828.30 \\
+a    &  54306.44 & feel       &  7000.32 \\
+my   &  44978.87 & disorder   &  6348.91 \\
+it   &  42339.31 & 2          &  5625.15 \\
+of   &  41440.48 & manic      &  5109.62 \\
+that &  35591.87 & help       &  4308.47 \\
+have &  33440.11 & medication &  4296.24 \\
+is   &  31560.73 & mood       &  4234.74 \\
+me   &  29314.88 & 3          &  4031.80 \\
+for  &  29074.70 & lithium    &  3972.05 \\
+was  &  28148.62 & lamictal   &  3917.36 \\
+in   &  27311.69 & bp         &  3679.68 \\
+n't  &  26331.15 & depressed  &  3679.34 \\
+with &  24805.85 & doctor     &  3018.01 \\
+on   &  23315.22 & symptoms   &  2999.98 \\
+but  &  23129.51 & life       &  2950.94 \\
+you  &  23129.51 & anxiety    &  2936.18 \\
+\bottomrule
+\end{tabular}
+
+By looking at the second list, from which stopwords have been removed (stopwords list in \texttt{dictionaries/stopwords.py}), we can already make reasonable assumptions about first posts: central concerns include the phenomenology and symptomology of bipolar (bipolar, bp, disorder, manic, depressed, depression, mood, symptoms); treatment is also promiment (meds, medication, lithium, lamictal, doctor), as are mental states and processes generally. Diagnosing and feeling are apparently the most key verbs, though without lemmatisation this result may be misleading.
+
+Issues remain, however. First, from the list without stopwords removed, we can see exactly how important stopwords are to general keywording of large corpora.
+
+Second, by comparing to the BNC, we of course cannot answer the question of how first posts are different from subsequent posts.
+
+
+Though we could simply continue to remove words that we find uninteresting (2 and 3) until the list more closely approximates what we imagine the corpus to be about, we 
+
+
+\subsubsection{Keywording by POS}
+
+Because certain kinds of grammatical systems realise certain kinds of meanings, it makes sense to extend our keywording approach to take grammatical information into account.
+
+By splitting up keyword calcuation by POS, and by performing lemmatisation, 
+
+Such processes can also bring extra focus to non-nominal content words, which tend to be more or less absent in general keyword lists.
+
+As we are interested in the language of first posts, we may also use as a reference corpus any non-first post to the board.
+
+\begin{quotation}
+\begin{singlespacing}
+\begin{pyverbatim}
+# search trees by pos
+queries = {'noun': r'__ > /^N.?/ !< __',
+           'verb': r'__ > /^V.?/ !< __',
+           'adjective': r'__ > /^J.?/ !< __',
+           'adverb': r'__ > RB !< __'}
+
+raw = interrogator(corpus, 'words', queries, lemmatise = True)
+for name, data in raw.items():
+    # calculate keywords in first posts
+    k = editor(data.results.ix[0], 'keywords', data.results, 
+        threshold = False, print_info = False).results
+    # print
+    print texify(k, sort_by = 'total', toptail = True, 
+        n = 10).replace('{}', name + 's')
+\end{pyverbatim}
+\end{singlespacing}
+\end{quotation}
+
+\begin{table}
+\centering
+\footnotesize
+\begin{tabular}{lr|lr|lr|lr}
+
+\toprule
+Nouns & Keyness & Verbs & Keyness & Adjectives &  Keyness & Adverbs & Keyness \\
+\midrule
+year       &   872.30 &  diagnose   &   977.04 &  bipolar   &   928.62 &  recently   &   361.48 \\
+anyone     &   465.88 &  have       &   545.71 &  new       &   164.24 &  ago        &   277.70 \\
+month      &   406.20 &  start      &   216.33 &  angry     &    95.75 &  currently  &   149.34 \\
+depression &   292.48 &  suffer     &   179.59 &  extreme   &    76.41 &  never      &    96.11 \\
+medication &   242.55 &  feel       &   152.70 &  old       &    70.44 &  greatly    &    88.48 \\
+disorder   &   227.38 &  kill       &    84.36 &  scared    &    69.95 &  now        &    76.83 \\
+mg         &   226.01 &  cry        &    84.13 &  crazy     &    61.48 &  constantly &    70.12 \\
+mother     &   177.19 &  seem       &    74.55 &  depressed &    56.53 &  extremely  &    63.63 \\
+swing      &   163.27 &  become     &    72.06 &  constant  &    54.17 &  very       &    55.83 \\
+anxiety    &   152.86 &  appreciate &    69.09 &  bad       &    52.05 &  ever       &    50.37 \\
+...        &      ... &  ...        &      ... &  ...       &      ... &   ...       &      ... \\
+kait       &  -201.71 &  update     &   -96.62 &  own       &   -58.82 &  right      &   -43.84 \\
+bp         &  -225.71 &  post       &  -102.90 &  least     &   -66.90 &  soon       &   -45.13 \\
+tdoc       &  -234.47 &  wish       &  -103.33 &  med       &   -76.92 &  probably   &   -55.18 \\
+seaturtle  &  -334.62 &  need       &  -109.62 &  important &   -79.82 &  hopefully  &   -74.12 \\
+erin       &  -340.58 &  thank      &  -124.33 &  welcome   &   -96.97 &  maybe      &   -81.85 \\
+hug        &  -358.38 &  sound      &  -130.96 &  easy      &  -110.32 &  perhaps    &   -85.82 \\
+tsohl      &  -376.41 &  let        &  -132.97 &  sorry     &  -143.73 &  here       &   -88.46 \\
+kat        &  -447.60 &  keep       &  -134.89 &  right     &  -156.53 &  definitely &   -95.07 \\
+goody      &  -514.14 &  welcome    &  -193.08 &  glad      &  -258.36 &  too        &  -126.17 \\
+pdoc       & -1053.07 &  hope       &  -355.10 &  good      &  -520.89 &  well       &  -157.57 \\
+\bottomrule
+\end{tabular}
+\caption{Keywords by word class}
+\label{tab:kwds_by_wordclass}
+\end{table}
+
+Keywording by word class (See Table \ref{tab:kwds_by_wordclass}) provides a more illuminating picture.
+
+\paragraph{Key nouns} in first posts show us some words from the previous search for general keywords. \emph{mg} (milligram) is key because new members may describe their specific medication regimen as a part of their recited history.
+
+\begin{quotation} \singlespacing \small 
+\texttt{
+\begin{enumerate}
+\item Hi I 'm Chandra I 'm also a Rapid Cycler I take Lithium Carbonate ER 300 mg 1 tab 3xday and Risperdal 0.25 mg 1 tab 4 times qday .
+\item RIGHT NOW I AM TAKING 150 MG LAMICTAL TWICE A DAY, .5 RISPIRIDAL IN THE PM, 1MG LEXAPRO IN THE AM, AND 1MG KLONIPIN PRN, THIS ONE IS USUALLY SPLIT IN HALF AND I TAKE IT ABOUT TWICE A DAY .
+\item I am currently taking 200 mg per day of Lamictal for my new diagnosis of ` bipolar II ' .
+\end{enumerate}}
+\end{quotation}
+
+\noindent Alternatively, \emph{mg} appears when frequently when new users are seeking health information that peers are more likely to possess\slash transmit than healthcare professionals, such as information about how others feel when taking a similar dosage, or whether or not others feel that a current dosage is too little or too much.
+
+When looking at nouns that are very unkey, we can see that proper nouns denoting the names of veteran community members predominate. This is not only because veteran members are often addressed by their nickname by non-new contributors, but also because some veteran members sign their name at the end of each post.
+
+\paragraph{Key verbs} are 
+
+In terms of systemic functional process types, \emph{have}, \emph{feel}, \emph{seem} and \emph{become} are at least relational, highlighting 
+
+The exception to this is \emph{appreciate}.
+
+Concordancing reveals that \emph{appreciate} is a politness strategy, often responsible for marking the incongruence of declarative clauses intended to elicit information from other forum users:
+
+\begin{table}
+
+\centering 
+\footnotesize
+
+\begin{tabular}{lrrl}
+
+\toprule
+0  &                                                                                  i 'd     &    appreciate &   any words of advice and/or some sort of validation             \\
+1  &                                                                                     i     &    appreciate &   your help                                                      \\
+2  &                                                                                     i     &    appreciate &   your help and love and concern                                 \\
+3  &                                                                                     i     &    appreciate &   any advice you can give me                                     \\
+4  &                                                          thanks for reading and i 'd      &    appreciate &   any input                                                      \\
+5  &                                                          hope i helped, i would sure      &    appreciate &   any information on the disability question                     \\
+6  &                                                                               i truly     &    appreciate &   it                                                             \\
+7  &                                                                    it would be so much    &   appreciated &   and needed                                                     \\
+8  &                                                            any imput would be greatly     &   appreciated &   as i do n't know what else i can do but try to apply for ssdi  \\
+9  &                                                         insight or advice i would greatly &    appreciate &   it                                                             \\
+10 &                                                                     i of course would     &    appreciate &   it very much                                                   \\
+11 &                                                                                    i' d   &    appreciate &   any advice on the subject                                      \\
+12 &                                                                               i would     &    appreciate &   if someone could let me know if i am right                     \\
+13 &                                                  any stories or responses are greatly     &   appreciated &  , and this site has been a blessing                             \\
+14 &                                                              please respond, i would      &    appreciate &   it very much ... thankyou                                      \\
+15 &                                                                                    i' d   &    appreciate &   advice soooo much                                              \\
+16 &                                                                        i would really     &    appreciate &   some advice with this, as in medication                        \\
+17 &   similar symptoms and diagnosed as bipolar? i                                            &    appreciate &   your input on this matter                                      \\                                       \\
+18 &                                              well thanks - any feedback is needed and     &   appreciated &   greatly                                                        \\
+19 &                                                                                 would     &    appreciate &   and welcome and helpful insight and feedback                   \\
+\bottomrule
+\end{tabular}
+\caption{\emph{Appreciate} as key verb}
+\label{tab:conc:appreciate}
+\end{table}
+We can see from the unkey verbs that many non-first posts involve encouraging new members to make more contributions to the board, as in the verbal instantiations of \emph{update}, \emph{post}, \emph{let} and \emph{keep}.
+
+\paragraph{Key adjectives,} like the key verbs, often have negative emotional value (\emph{angry}, \emph{scared}, \emph{crazy}, \emph{depressed}, \emph{bad}), especially when compared to unkey results (\emph{wish}, \emph{thank}, \emph{welcome}, \emph{hope}).
+
+\paragraph{Key adverbs} all into two major categories: temporal (e.g. \emph{recently}, \emph{ago}, \emph{currently}, \emph{never}, \emph{now}, etc.) and emphative (\emph{never}, \emph{greatly}, \emph{constantly}, \emph{extremely}, \emph{very}, \emph{ever}). This seems in line with the idea that newcomers to an online community may construct `extreme case formulations' as a means of demonstrating their fulfillment of community criteria. At the same time, users seem aware of an important generic requirement to provide a (medical) history. Likewise, the most unkey adverbs are those denoting uncertainty (\emph{probably}, \emph{hopefully}, \emph{maybe}, \emph{perhaps}).
+
+Given the pivotal role played by adjectives and adverbs, (as Epithets and circumstances) in appraisal systems, this is perhaps unsurprising. The emotionally charged nature of first posts may potentially be an indication that new users choose to make their first contribution during emotional states, where social support or immediate advice is more urgent.
+
+\begin{quotation} \singlespacing \small \texttt{I was wrongly diagnosed as schizophrenic for many years ... then anxiety/depression ... Anyway, I started Topamax 3 weeks ago and have been sleeping fine with my 100 mgs of Trazadone that I have been taking for years ... but tonight I can not sleep ... I still have racing thoughts and even shed a tear when a sad commercial came on the TV (one that does n't normally make me cry).}
+\end{quotation}
+
+\subsubsection{Keywording by systemc-functional categories}
+
+It is important to be mindful of which grammatical systems need to be probed in order to learn about different kinds of meanings. If we are interested in the `aboutness' of a text, we are likely interested in experiential phenomena. It thus makes sense to search for roles within the systems independently.
+
+Searching for nouns disregards the ability for nouns to (for example) perform modifying functions (risk management) or express the range in a process-range configuration (to take a bath).\endnote{Neither CoreNLP's dependency or constituency grammar accounts for the construal of processes via process-range configurations. Given that such constructions are much more easily identified `from above' (e.g. by considering whether or not the verb is semantically empty), rather than within the lexicogrammar (e.g. these verbs are always of a specific process type), it does not currently appear possible to extract them from CoreNLP (or other automatic annotation grammars.}~
+
+\begin{singlespacing}
+\begin{pyverbatim}
+from dictionaries.roles import roles
+part = interrogator(corpus, 'm', roles.participant, lemmatise = True)
+proc = interrogator(corpus, 'm', roles.process, lemmatise = True)
+circ = interrogator(corpus, 'm', roles.circumstance, lemmatise = True)
+for r in [part, proc, circ]:
+    k = editor(r.results.ix[0], 'k', r.results, print_info = False).results
+    print texify(k, sort_by = 'total', toptail = True, n = 10)
+\end{pyverbatim}
+\end{singlespacing}
+
+It is important to bear in mind that we are not searching systemic-functionally parsed data: instead, we are searching Stanford CoreNLP dependency parses for sets of labels that correspond, often messily, with systemic categories. In the previous search, for example, objects of prepositional phrases have been treated as circumstances, when in SFL this is often not the case. Furthermore, we are doing little to account for nominalisation or rank shift.
+
+Nonetheless, we can see the usefulness of functional grammar in corpus querying.
+
+
+% 
+% The three different kinds of keywords show us different kinds of insights into the data. Using \sctext{k1}, we can see that past tense verb-forms and pronouns are often very key. Most open class words are temporal (\emph{ago}, \emph{months}, \emph{recently}, \emph{years}, \emph{started}). Also ranking highly are \emph{bipolar} and \emph{diagnosed}. As shown in the last chapter, part of the reason for this is the fact that bipolar and diagnosis are often shortened in veteran posts to \emph{bp}, \emph{dx}. 
+% 
+% \sctext{k1} is far from useless, as it provides a broad picture of key lexis. Leaving results unlemmatised allows us to see that the most key verb is the past contrastive Auxiliary \emph{been}, which is commonly used to demonstrate the continuation of (typically negative) events from the past toward the present, necessitating new actions within the narrative (seeking help, getting diagnosed, joining the forum, etc.) % ifg 337
+% 
+% \sctext{k2}, being lemmatised, particularly highlights common verbs. 
+% 
+% Of course, much of what we are interested in when keywording is surmising the \emph{field of discourse}: as such, we are far more interested in Events within verbal groups than Finites and Auxiliaries. As this search conflates all categories of verb, (keywording of Events below). % ifg 336
+% 
+% \sctext{k3} provides a richer picture: 
+ 
+% There are still issues, however. Since participants greatly outnumber processes in the corpus (as in most natural language), processes may be underepresented. Finally, the centrality of temporal words to interpersonal and experiential meaning is so far difficult to determine.
+
+% While stopword lists would likely be used to remove most of the words in \sctext{k1}, this is not a particularly sound solution: it involves adding subjectivity into a process prized for its objectivity. Moreover, longer stopword lists could simply be used to discover themes from simple wordlists. Stopword-based approaches also remove potentially enlightening results before the researcher can notice them. Given that pronoun and tense choices varies greatly over the course of membership in the forum (see previous chapter).
+
+It is important to remember that for the keywording presented above, the reference corpus consisted every non-first post. The stark contrast between key and unkey words would likely be greater still if the reference corpus tallied only posts from later stages of membership.
+
+    \subsection{Key participants, processes and circumstances}
+
+    A problem with keywording entire corpora is that we are exposed to all word classes, and a mixture of participants, processes and cirumstances, simultaneously. Though temporal words were present in in each list of more general keywords, the findings in the previous chapter suggest that time is seldom the central focus of communication within the forum.
+
+More or less, when keywording, we are interested in words that are experientially important---that is, words that constitute the things and events being frequently discussed in the corpus. Keywording by word class is certainly designed to extract this kind of information. That said, while keywording by word class is certainly more elucidating than traditional approaches to keywording, it is still far from ideal. Though nouns congruently realise Participants, they are also common within Circumstances.
+
+    %i have been   diagnosed   bipolar a little over a year ago
+
+By making a distinction between these two kinds of noun, and by similar distinctions in the SFG, we can create a better set of keywords.
+
+        So far, we have been using general dictionaries of all words, or all lemmata, in the target and reference corpus. Instead, we can interrogate the corpus for participant heads, and calculate the keyness of each participant in the subcorpus of first posts.\endnote{It should be borne in mind, however, that this kind of counting does not take the relative proportion of participants into account.}
+
+        \begin{quotation}
+        \begin{singlespacing}
+                \begin{pyverbatim}
+                        # get lemma forms of participants all posts
+                        from dictionaries.roles import roles
+                        parts = interrogator(corpus, 'd', function_filter = roles.participant, 
+                            lemmatise = True)
+                        kwds = editor(parts.results.ix[0], 'k', parts.results)
+                        print texify(kwds.results.head(20))
+                \end{pyverbatim}
+                \end{singlespacing}
+        \end{quotation}
+
+        \begin{table}[h!] \singlespacing \small \centering
+        \begin{tabular}{lr}
+                \toprule
+                Participant &  Keyness \\
+                \midrule
+                i            &  1972.09 \\
+                anyone       &   326.47 \\
+                he           &   224.63 \\
+                she          &   113.17 \\
+                mother       &   102.18 \\
+                medication   &    97.49 \\
+                myself       &    95.50 \\
+                doctor       &    89.19 \\
+                swing        &    81.92 \\
+                bipolar      &    64.84 \\
+                hi           &    62.93 \\ % weird lemmatisation makes it hus
+                episode      &    59.19 \\
+                this         &    54.82 \\
+                disorder     &    54.66 \\
+                psychiatrist &    52.05 \\
+                problem      &    50.13 \\
+                life         &    44.20 \\
+                father       &    41.76 \\
+                girlfriend   &    39.13 \\
+                attack       &    36.39 \\
+                suicide      &    36.25 \\
+                dr.          &    35.84 \\
+                mg           &    34.88 \\
+                relationship &    32.37 \\
+                boyfriend    &    31.74 \\
+                thought      &    31.27 \\
+                advice       &    30.75 \\
+                help         &    29.95 \\
+                high         &    27.16 \\
+                depression   &    26.62 \\
+                \bottomrule
+                \end{tabular}
+                \caption{Lemmatised Things in participants by keyness} 
+        \end{table}
+
+        We can see that keywording only particular functional-semantic categories provides lists thare are in many ways more useful than the output of general keywording.
+
+        We can also see words describing either the two poles of bipolar disorder (high, depression) as well as the oscillation process (mood swings, panid attacks).
+
+        Temporal words do not rank highly as key participants.
+
+    \subsubsection{Key Events}
+
+    SFL's experiential grammar treats the rightmost (lexical) verb in a verbal group as the Event, which Halliday \& Matthiessen liken to the Thing in the nominal group, representing the semantic core of experiential meaning. % 337
+
+    It is possible to search both constituency and dependency parses for Events with a fair amount of accuracy: in the former, they can be found by finding the rightmost verb in a string of one or more consecutive VPs (Tregex: \verb:'/VB.?/ >># ( VP >+(VP) (VP !> VP))':). Dependency grammars typically mark the Event as the root node of the parse.\endnote{By default, Stanford CoreNLP labels the Value\slash Attribute as the root node in relational processes.}~
+
+    % add dependency
+
+    \begin{table} \singlespacing \small \centering
+    \begin{tabular}{lr}
+        \toprule   % constituency
+    
+        Event (via constituency) &  Keyness \\
+        \midrule
+        diagnose   &   521.30 \\
+        appreciate &   113.01 \\
+        suffer     &    88.68 \\
+        be         &    75.35 \\
+        wonder     &    45.61 \\
+        date       &    36.13 \\
+        have       &    29.75 \\
+        start      &    28.90 \\
+        put        &    22.12 \\
+        marry      &    20.34 \\
+        \bottomrule
+        \end{tabular}
+        \caption{Events by keyness}
+        \label{tab:events}
+    \end{table}
+
+These Events, even abstracted from their participants, are rich representations of a field of discourse centrally concerned with bipolar and mental health: \emph{diagnose}, the most key Event in first posts, highlights the close relationship between diagnosis and the forum: having been formally diagnosed is a criteria for legitimate further participation within the community.
+
+
+\begin{quotation}
+\begin{singlespacing}
+\begin{pyverbatim}
+# tregex query
+query = r'VP !> VP <+(VP) (VP <<# (/VB.?/  < /(?i)diagnos/))'
+
+def del_text_after_diag(w):
+    """delete any text after the Event"""
+    import re
+    return re.sub(r'(?i)(^.*?\bdiagno.*?\b)(.*$)', r'\1', w) # $
+
+vps = interrogator(corpus, 'w', query, post_process = del_text_after_diag)
+print texify(vps.results.sum(), n = 20, colname = 'Frequency')
+\end{pyverbatim}
+\end{singlespacing}
+\end{quotation}
+
+
+We can probe the lexicogrammar of the process of diagnosis further. By finding the most common dependents on the diagnose lemma as root, it becomes possible to see the kinds of participants and circumstances that are selected in \emph{diagnose} processes:
+
+\begin{pyverbatim}
+# get dependents and their roles in diagnose process
+part_in_diag = interrogator(corpus, 'd', query = r'(?i)\bdiagno', 
+               lemmatise = True, dep_type = 'collapsed-ccprocessed-dependencies')
+# normalise some words
+part_in_diag = load_result('part_in_diag_process')
+edits = {'bipolar': r'\b(bp|bipolar|ii|bi-polar).*',
+         'doctor': r'\b(doc$|docs$pdoc|tdoc|psychiatrist|dr\.*$|shrink|md\.*).*', # $
+         'you': r'\b(you|yoursel).*',
+         'i': r'\b(i|me|myself)$'} # $
+part_in_diag = editor(part_in_diag.results, replace_names = edits, 
+    just_subcorpora = '01')         
+# edit names to sfl categories
+from dictionaries.roles import roles
+regexes = {k: as_regex(v) for k, v in roles._asdict().items()}
+role_dict = {}
+for name, regex in regexes.items():
+    role_dict[name] = editor(part_in_diag.results, replace_names = (regex, name), just_entries = r'^%s:' % name).results
+\end{pyverbatim}
+
+This leaves us with 
+
+\begin{pyverbatim}
+p = editor(parts_circs.results, '%', 'self', just_entries = r'(actor|goal|range):', 
+    sort_by = 'total', just_subcorpora = ['01', '6+'], keep_stats = False, keep_top = 12)
+p.results.rename(index={'01': 'First posts', '6+': 'Veteran posts (groups 6$+$)'}, 
+                 inplace = True)
+p = editor(p.results, replace_names = [(':', r'\\textbf{: '), (r'$', r'}')]) # $
+plotter('Participants selected by \emph{diagnose} as Event', p.results.T.head(7), 
+        kind = 'bar', y_label = 'Percentage of all \emph{diagnose} circumstances', 
+        x_label = 'Word', figsize = (11, 5.5), rot = 0, save = True)
+\end{pyverbatim}
+
+\begin{pyverbatim}
+# get relative frequencies of circumstances
+c = editor(parts_circs.results, just_entries = r'^circ:', 
+    sort_by = 'total', just_subcorpora = ['01', '6+'], keep_stats = False)
+
+c = editor(c.results, '%', c.totals, replace_names = r'^circ:')
+
+plotter(r'Common circumstances of \emph{diagnose} processes in first posts', 
+    c.results.ix['01'].order(ascending=False), kind = 'bar', num_to_plot = 13, 
+    figsize = (10, 5), show_totals = 'plot', x_label = 'Participant', save = True, 
+    y_label = 'Percentage of all circ. in \emph{diagnose} process')
+
+# a new chart, comparing first posts to veteran posts
+
+key_terms = ['recently', 'just', 'ago', 'now', 'year', 'week',
+             'properly', 'correctly', 'officially', 'accurately', 'here']
+
+selected_c = editor(c.results, just_entries = key_terms, 
+               just_subcorpora = ['01', '6+'], sort_by = 'decrease')
+
+selected_c.results.rename(index={'01': 'First posts', 
+    '6+': 'Veteran posts (6$+$)'}, inplace = True)
+
+plotter('Circumstances surrounding the process of diagnosis', selected_c.results.T, 
+    num_to_plot = 'all',  style = 'fivethirtyeight', kind = 'bar', 
+    y_label = 'Percentage of all \emph{diagnose} circumstances', 
+    x_label = 'Word', figsize = (10, 5))
+\end{pyverbatim}
+
+We can use this information to understand who is diagnosed and who does diagnosing, as well as the circumstances:
+
+% the below is not needed now
+\begin{pyverbatim}
+plotter(r'Common participants in \emph{diagnose} processes in first posts (excluding I)', 
+    p.results.ix['First posts'].order(ascending=False).drop('goal:i'), kind = 'bar', 
+    num_to_plot = 13, figsize = (13, 7), show_totals = 'plot', x_label = 'Participant',
+    y_label = 'Percentage of all participants in \emph{diagnose} process')
+
+plotter(r'Common participants in \emph{diagnose} processes in veteran posts', 
+    p.results.ix['Veteran posts'].order(ascending=False), kind = 'bar', num_to_plot = 13, 
+    figsize = (13, 7), show_totals = 'plot', x_label = 'Participant', save = True, 
+    y_label = 'Percentage of all participants in \emph{diagnose} process')
+
+plotter(r'Common circumstances of \emph{diagnose} processes in first posts', 
+    c.results.ix['01'].order(ascending=False), kind = 'bar', num_to_plot = 13, 
+    figsize = (13, 7), show_totals = 'plot', x_label = 'Participant', save = True, 
+    y_label = 'Percentage of all circumstances in \emph{diagnose} process')
+
+plotter(r'Common circumstance of \emph{diagnose} processes in veteran posts', 
+    c.results.ix['10'].order(ascending=False), kind = 'bar', num_to_plot = 13, 
+    figsize = (13, 7), show_totals = 'plot', x_label = 'Participant', save = True,
+    y_label = 'Percentage of all circumstances in \emph{diagnose} process')
+\end{pyverbatim}
+
+        %\begin{figure}[htb]
+        %\centering
+        %\includegraphics[width=0.65\textwidth]{../images/common-circumstances-of-emphdiagnose-processes-in-first-posts.png}
+        %\caption{forum}
+        %\label{fig:forum}
+        %\includegraphics[width=0.65\textwidth]{../images/participants-selected-by-emphdiagnose-as-event.png}
+        %\caption{forum}
+        %\label{fig:forum2}
+        %\includegraphics[width=0.65\textwidth]{../images/circumstances_surrounding_diagnosis.png}
+        %\caption{forum}
+        %\label{fig:foru3}
+        %\end{figure}
+
+    \begin{landscape}
+    \raggedright
+    \begin{figure}
+    \captionsetup[subfigure]{oneside,margin={-1.5cm,-.5cm}}
+    \centering % [t!] % "[t!]" placement specifier just for this example
+    \begin{subfigure}{.64\textwidth}
+    \includegraphics[width=\linewidth]{../images/common-circumstances-of-emphdiagnose-processes-in-first-posts.png}
+    \caption{Common heads of circumstances} \label{fig:a}
+    \end{subfigure}
+    \begin{subfigure}{.64\textwidth}
+    \includegraphics[width=\linewidth]{../images/participants-selected-by-emphdiagnose-as-event.png}
+    \caption{Things in participants} \label{fig:b}
+    \end{subfigure}
+    \begin{subfigure}{.64\textwidth}
+    \includegraphics[width=\linewidth]{../images/circumstances_surrounding_diagnosis.png}
+    \caption{Circumstances in first and veteran posts contrasted} \label{fig:f}
+    \end{subfigure}
+    \begin{subfigure}{.64\textwidth}
+    \singlespacing \footnotesize
+    \begin{tabular}{lr}
+    \toprule
+    VG with \emph{diagnose} as Event &  Frequency \\
+    \midrule
+    was diagnosed                &    682 \\
+    have been diagnosed          &    122 \\
+    has been diagnosed           &     55 \\
+    've been diagnosed           &     45 \\
+    was just diagnosed           &     40 \\
+    being diagnosed              &     40 \\
+    was recently diagnosed       &     38 \\
+    diagnosed                    &     25 \\
+    was first diagnosed          &     24 \\
+    to diagnose                  &     22 \\
+    have recently been diagnosed &     21 \\
+    been diagnosed               &     21 \\
+    got diagnosed                &     17 \\
+    %am diagnosed                 &     14 \\
+    %to be diagnosed              &     14 \\
+    %have just been diagnosed     &     12 \\
+    %have n't been diagnosed      &     11 \\
+    %were diagnosed               &     10 \\
+    %is diagnosed                 &     10 \\
+    %have not been diagnosed      &     10 \\
+    \bottomrule
+    \end{tabular}
+    \caption{Unprocessed verbal groups with \emph{diagnose} as Event} \label{fig:ax}
+    \end{subfigure}
+    \caption{x} \label{fig:x}
+    \end{figure}
+    \end{landscape}
+
+We can also use the dependencies of diagnose to extract the most common interpersonal components in clauses with diagnose as the predicator:
+
+\begin{mdframed} [backgroundcolor=gray!12] \footnotesize \singlespacing
+\begin{pyverbatim}
+part_in_diag = load_result('diagnose_coll_deps')
+
+lst = [(r'^(nsubj|nsubjpass):', 'subject'),
+       (r'^(aux|auxpass):', 'finite'),
+       (r'^(dobj|iobj|):', 'complement'),
+       (r'^(agent|prep_[a-z]*|xx):', 'adjunct')]
+
+result = {}
+for role, newname in lst:
+    t = editor(part_in_diag.results, just_entries = role)
+    t = editor(t.results, replace_names = role)
+    result[newname] = t
+
+
+    for role, newname in lst:
+        t = editor(part_in_diag.results, just_entries = role)
+        t = editor(t.results, replace_names = (role, newname))
+    
+
+    #for n in range(t.totals.sum()):
+    the_str.append()
+
+
+\end{pyverbatim}
+\vspace{0.8em}
+\end{mdframed}
+
+Placing these in their unmarked order, we can trace paths
+
+This can be visualised using DoubleTree
+
+
+
+
+
+
+ that passivisation is extremely common, in order to centre the propositional value of the clause on the diagnosed person (most typically the writer him\slash herself) and on the past occurrence of the event:
+
+
+% example
+
+\subsection{Reconstructing activity sequences}
+
+    Martin (1992) provides a characterisation of fields of discourse as being comprised of `sets of activity sequences oriented to some global institutional purpose' \cite[p.~292]{martin_english_1992}. Delicacy remains important: fields may contain other fields, and texts may contain multiple fields.
+
+    Activity sequences can also be broken down into components:
+
+    \begin{enumerate}
+    \item taxonomies of participants and qualities
+    \item Configurations of processes and the taxonomised participants
+    \end{enumerate}
+    %
+    With activity sequence defined as ordered sets of valid configurations. Martin's example, for tennis:
+
+    i. TAXONOMY --- part/whole relations among \emph{game-set-match} \\
+    ii. CONFIGURATION --- Agent Process Medium structure: \emph{player-serve-ball} \\
+    iii. ACTIVITY SEQUENCE --- \emph{player serve}, \emph{opponent return}, \emph{player volley} \\
+
+    While Martin focusses on hypernymic\slash hyponymic relationships, suh an approach adds a great deal of compexity to corpus querying. Accordingly we will instead create flat word lists, denoting experientially similar (or taxonomic) clusters of things.\endnote{Here, the construction of `flat taxonomies' is performed manually, though introspection and familiarity with the data. Undocumented features of \texttt{corpkit} include functions for automatically creating such lists by both searching corpora and using look-up resources such as WordNet.}~
+
+    % could i show that pronominal participants behave like the other categories ? 
+    We can also add pronominal participants to out categories by person:
+
+\begin{itemize}
+    \item 1st person: the self
+    \item 2nd person: other forum members
+    \item 3rd person: friends and family with bipolar disorder; health professionals
+\end{itemize}
+    
+
+    As our major goal is to capture similar or synonymous participant Things, rather than creating hierarchical taxonomies, we can simply create flat word lists.
+
+    \begin{pyverbatim}
+    docwords = ['doc', 'pdoc', 'tdoc', 'doctor', 'doctors', 'therapist', 'shrink']
+    \end{pyverbatim}
+
+
+
+
+
+
+
+
+    Accuracy becomes an issue: due to the fact that many realised processes are metaphorical in nature (he sounds happy; the book speaks to me; I feel the edge\slash I feel warm). Automatic process type identification is a notoriously difficult undertaking for precisely this reason \cite{honnibal_converting_2004,odonnell_uam_2008,costetchi_semantic_2013}.\endnote{Inflection also complicates process-type identification to some extent, though can be handled effectively through generative regular expressions (see \url{https://github.com/interrogator/corpkit/blob/master/dictionaries/process_types.py}).}~
+    Disambiguation of process type is theoretically possible via nuanced probing of the grammar. \emph{Feel} as a relational process is \emph{complex-intransitive} in traditional grammar, while \emph{feel} as a material process is \emph{transitive}. The agnate reversal of the former is also ungrammatical: % ifg 211
+
+    \begin{enumerate}
+        \item \emph{* Happy is felt by me}
+        \item \emph{The edge is felt by me}
+    \end{enumerate}
+
+    \noindent Better automatic identification of process types falls outside the scope of this thesis, however.
+
+    Despite accuracy issues, with a large enough corpus, there are nonetheless some interesting patterns concerning the common participants in each process type\slash participant role:
+
+    % this analysis forthcoming

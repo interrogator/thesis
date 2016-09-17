@@ -181,3 +181,6 @@ TSWLatexianTemp*
 
 # Other
 *.DS_Store
+
+# Thesis
+investigation/data/bp-parsed

@@ -185,3 +185,4 @@ TSWLatexianTemp*
 # Thesis
 investigation/data/bp-parsed
 investigation/
+notebooks/.ipynb_checkpoints/

@@ -9,6 +9,10 @@ This repository contains materials related to my PhD research, which involves id
 
 The thesis relies extensively on *corpkit*, a purpose-built Python module, which is available via [GitHub](https://www.github.com/interrogator/corpkit) and documented at [ReadtheDocs](http://corpkit.readthedocs.io).
 
+## Cloning the repository
+
+This repository uses [Git Large File Storage](https://git-lfs.github.com/) to host the thesis data. This means that `git-lfs` must be installed in order to automatically download the investigation data. If you get [an error when cloning](https://github.com/github/git-lfs/issues/1166), try removing the `www.` from the `git clone` command.
+
 ## Working with Jupyter Notebooks
 
 The *Jupyter Notebooks* in the `notebooks` directory can be viewed online, or downloaded and run locally. If you clone the whole repository, it is possible to unzip the data and run interrogations yourself.

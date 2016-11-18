@@ -4,7 +4,7 @@ This repository contains materials related to my PhD research, which involves id
 
 1. The thesis itself, in `.TeX` and `.pdf`
 2. *Jupyter Notebooks* containing code used to generate findings
-3. The dataset used for the thesis
+3. The dataset used for the thesis (inside `investigation.tar.gz`)
 4. Slides from presentations
 
 The thesis relies extensively on *corpkit*, a purpose-built Python module, which is available via [GitHub](https://www.github.com/interrogator/corpkit) and documented at [ReadtheDocs](http://corpkit.readthedocs.io).

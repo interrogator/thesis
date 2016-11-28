@@ -235,9 +235,9 @@ $2013$ &    $  202,393$ &  $  56,803  $ &  $   49,623   $ &    $   28,634$  &   
 \label{fig:avg_replies}
 \end{figure}
 
-Figure \ref{fig:stage_year} uses the Longitudinal Structure to provide an overview of the amount of activitiy within the \gls{Forum} by year. The number of \glspl{post} steadily increases until 2009, at which point there is a similarly steady decline. Figure \ref{fig:stage_year_filled} shows the extent to which different membership stages are represented in the \gls{Forum} in a given year. Having information about the composition of membership stages at different points in time makes it possible to speculate as to what a low or high concentration of veteran members does to language use in the \glslink{Forum}{community} as a whole. This is not, however, a focus of the thesis.
+Figure \ref{fig:stage_year} uses the Longitudinal Structure to provide an overview of the amount of activity within the \gls{Forum} by year. The number of \glspl{post} steadily increases until 2009, at which point there is a similarly steady decline. Figure \ref{fig:stage_year_filled} shows the extent to which different membership stages are represented in the \gls{Forum} in a given year. Having information about the composition of membership stages at different points in time makes it possible to speculate as to what a low or high concentration of veteran members does to language use in the \glslink{Forum}{community} as a whole. This is not, however, a focus of the thesis.
 
-Figure \ref{fig:stage_year_filled} shows that in the busiest years of the \gls{Forum}'s history, veteran \glspl{member} made proportionally more \glspl{post}.\endnote{It is important to remember that since a user must \gls{post} 560 or more times to enter the last stage of membership, veteran \glslink{member}{users} in the earlier years of the \gls{Forum}'s existence are bound to be less common.}~Veteran \glslink{member}{contributors} then gradually stop \glslink{post}{posting}; in the latest years sampled, many newcomers \gls{post} a question, but receive no reply (see Figure \ref{fig:avg_replies}). Combined, the smaller number of overall \glspl{post}, the departure of veteran \glspl{member}, and lack of follow\hyp{}up to new \glspl{thread} are taken as indicators that the \gls{Forum} is moribund.
+Figure \ref{fig:stage_year_filled} shows that in the busiest years of the \gls{Forum}'s history, veteran \glspl{member} made proportionally more \glspl{post}.\endnote{It is important to remember that since a user must \gls{post} 560 or more times to enter the last stage of membership, veteran \glslink{member}{users} in the earlier years of the \gls{Forum}'s existence are bound to be less common.}~These members then gradually stop \glslink{post}{posting}; in the latest years sampled, many newcomers \gls{post} a question, but receive no reply (see Figure \ref{fig:avg_replies}). Combined, the smaller number of overall \glspl{post}, the departure of veteran \glspl{member}, and lack of follow\hyp{}up to new \glspl{thread} are taken as indicators that the \gls{Forum} is moribund.
 
 \subsubsection*{\emph{Comparative Structure}}
 
@@ -262,7 +262,7 @@ Fut. vet. &    $17,070,684$ &  $4,946,441$ &  $4,257,184$ &  $2,559,998$ &      
 
 \section{\texttt{corpkit}: tools for corpus building and analysis} \label{sect:corpkit}
 
-Data analysis involved the use of a purpose\hyp{}built \texttt{Python}\hyp{}based toolkit, \texttt{corpkit}. In this section, I explain the need for the tool, its development, core functionality, and its significance within the research area. Complete documentation of its programmatic, graphical and interpreter interfaces is available via \texttt{\url{https://www.github.com/interrogator/corpkit}}.
+Data analysis involved the use of a purpose\hyp{}built \texttt{Python}\hyp{}based toolkit, \texttt{corpkit}. In this section, I explain the need for the tool, its development, core functionality, and significance within the research area. Complete documentation of its programmatic, graphical and interpreter interfaces is available via \texttt{\href{https://www.github.com/interrogator/corpkit}{https://www.github.com/interrogator/corpkit}}.
 
 \subsection{Rationale for tool development}
 
@@ -328,36 +328,36 @@ The toolkit is \emph{object\hyp{}oriented}. Users instantiate \glspl{corpus} as 
 %\todo{Workflow as algorithm}
 
 \begin{enumerate}
-    \item Create a project to house corpus\slash \glspl{corpus}, saved data, images, wordlists \\ (\texttt{new\_project} function)
+    \item Create a project to house corpus\slash \glspl{corpus}, saved data, images, wordlists \\ (\texttt{new\_project()} function)
     \item Instantiate plaintext corpus \\ (\texttt{Corpus} class)
-    \item Parse plaintext corpus using \texttt{Stanford CoreNLP} \\ (\texttt{Corpus.parse method})
-    \item Interrogate\slash concordance parsed corpus for \glslink{lexicogrammar}{lexicogrammatical} phenomenon \\ (\texttt{Corpus.interrogate} method)
+    \item Parse plaintext corpus using \texttt{Stanford CoreNLP} \\ (\texttt{Corpus.parse() method})
+    \item Interrogate\slash concordance parsed corpus for \glslink{lexicogrammar}{lexicogrammatical} phenomenon \\ (\texttt{Corpus.interrogate()} method)
     \begin{itemize}
         \item Constituency parses via \texttt{Tregex}\slash \texttt{nltk\_tgrep}
         \item Dependency parses via \texttt{pandas}
     \end{itemize}
-    \item Edit results \\ (\texttt{Interrogation.edit} method)
+    \item Edit results \\ (\texttt{Interrogation.edit()} method)
     \begin{itemize}
         \item Keeping, removing, merging entries or subcorpora
         \item Calculating relative frequencies
         \item Sorting, generating statistics, doing linear regression
         \item Keywording
     \end{itemize}
-    \item Tabulate, export or visualise edited results \\ (\texttt{Interrogation.visualise} method)
-    \item Save data to project \\ (\texttt{Interrogation.save} method)
+    \item Tabulate, export or visualise edited results \\ (\texttt{Interrogation.visualise()} method)
+    \item Save data to project \\ (\texttt{Interrogation.save()} method)
 \end{enumerate}
 %
-Interrogation objects store a dictionary of the parameters that created them, so that they can easily be reproduced. Saved interrogation results are loaded as \gls{corpus} attributes at the beginning of each session, simplifying the process of managing projects involving multiple \glspl{corpus}.
+\texttt{Interrogation} objects store a dictionary of the parameters that created them, so that they can easily be reproduced. Saved interrogation results are loaded as \gls{corpus} attributes at the beginning of each session, simplifying the process of managing projects involving multiple \glspl{corpus}.
 
 \subsubsection{Key design parameters}
 
 The tool was designed in response to the needs of the case study, to noted shortcomings of existing tools, and to a small body of literature describing needs in the future generation of \gls{corpus} tools \cite[e.g.][]{anthony_critical_2013,anthony_developing_2006,gries_50-something_2013}. \textcite{anthony_critical_2013} provide a succinct summary of needed tool development:
 
 \begin{quote} \small \singlespacing
-[Linguistic research] will rely increasingly on large corpora, advanced functionality, and sophisticated statistical methods. \ldots \Gls{corpus} tool development should be an open source initiative with tool components being developed in a modular fashion. By dividing tool components in this way, it becomes easier for tool functions and features to be extended, modified, or simplified depending on the need' \parencite*[pp.~155--156]{anthony_critical_2013}.
+[Linguistic research] will rely increasingly on large corpora, advanced functionality, and sophisticated statistical methods. \ldots~\Gls{corpus} tool development should be an open source initiative with tool components being developed in a modular fashion. By dividing tool components in this way, it becomes easier for tool functions and features to be extended, modified, or simplified depending on the need' \parencite*[pp.~155--156]{anthony_critical_2013}.
 \end{quote}
 %
-\texttt{corpkit} responds to each of these parameters: it is built to work with \glspl{corpus} of any size, and to allow multiprocessing to speed up queries over very large datasets; it has the most advanced functionality of any corpus interrogation tool to date, with support for parsing, interrogating parser output, and distinguishing between subcorpora and speaker IDs; it integrates with \texttt{scipy} \cite{scipy2001} and \texttt{pandas} \cite{mckinney_pandas_2010} in order to allow complex mathematical operations; it is free and open\hyp{}source; it is modular, interfacing with dedicated modules for editing, storing and visualising; graphical and command\hyp{}line interfaces tailored to programming and non\hyp{}programming linguists.
+\texttt{corpkit} responds to each of these parameters: it is built to work with \glspl{corpus} of any size, and to allow multiprocessing to speed up queries over very large datasets; it has the most advanced functionality of any corpus interrogation tool to date, with support for parsing, interrogating parser output, and distinguishing between subcorpora and metadata tags or values; it integrates with \texttt{scipy} \cite{scipy2001} and \texttt{pandas} \cite{mckinney_pandas_2010} in order to allow complex mathematical operations; it is free and open\hyp{}source; it is modular, interfacing with dedicated modules for editing, storing and visualising; graphical and command\hyp{}line interfaces tailored to programming and non\hyp{}programming linguists.
 
 \subsection{Interfaces and functionality of the tool}
 
@@ -369,7 +369,7 @@ The most complex interface is the \gls{API}, implemented in Python. Through this
 
 \paragraph{\texttt{Corpus}}
 
-The \texttt{Corpus} class models a directory (and optionally, subdirectories) of data files, which may be plain text files or \texttt{CONLL-U} data. Though the toolkit is oriented toward parsed and structured data, basic functionality for interrogating and concordancing is available for plain text \glspl{corpus} as well. \texttt{Corpus} objects have a \texttt{parse} method, which is essentially a wrapper around \texttt{Stanford CoreNLP}, with keyword arguments for annotators, memory allocation and so on. In the example below, a plaintext Corpus object is created and parsed with \texttt{Stanford CoreNLP} using default parameters.
+The \texttt{Corpus} class models a directory (and optionally, subdirectories) of data files, which may be plain text files or \texttt{CONLL-U} data. Though the toolkit is oriented toward parsed and structured data, basic functionality for interrogating and concordancing is available for plain text \glspl{corpus} as well. \texttt{Corpus} objects have a \texttt{parse} method, which is essentially a wrapper around \texttt{Stanford CoreNLP}, with keyword arguments for annotators, memory allocation and so on. In the example below, a plaintext \texttt{Corpus} object is created and parsed with \texttt{Stanford CoreNLP} using default parameters.
 
 \begin{minted}[linenos,frame=single,xleftmargin=1cm]{python}
 from corpkit import Corpus
@@ -422,6 +422,7 @@ Wordclass      &     \texttt{X} &       \texttt{GX} &        \texttt{DX} &      
 %Distance from \texttt{root}       &     \texttt{R} &       \texttt{GR} &        \texttt{DR} &        \texttt{HR} &     \texttt{NR} &        \texttt{BR} &        \texttt{-1R} &        \texttt{-1R} \\
 Index          &     \texttt{I} &       \texttt{GI} &        \texttt{DI} &        \texttt{HI} &     \texttt{NI} &        \texttt{BI} &        \texttt{-1I} &        \texttt{-1I} \\
 Sent. index &     \texttt{S} &       \texttt{GS} &        \texttt{DS} &        \texttt{HS} &     \texttt{NS} &        \texttt{BS} &        \texttt{-1S} &        \texttt{-1S} \\
+Named entity &     \texttt{E} &       \texttt{GE} &        \texttt{DE} &        \texttt{HE} &     \texttt{NE} &        \texttt{BE} &        \texttt{-1E} &        \texttt{-1E} \\
 \bottomrule
 \end{tabular}
 \caption[Possible object--attribute combinations]{Possible object--attribute combinations to search, exclude or show}
@@ -444,7 +445,7 @@ d_doc = corpus.interrogate(dquery, show=L, conc=True)
 # show table
 print(d_doc.results.to_latex(columns=range(4)))
 \end{minted}
-\caption[Using the \texttt{corpkit} API]{Using the \texttt{corpkit} API and Tregex to find Epithets\slash Classifiers of health professionals in the Bipolar Forum Corpus}
+\caption[Using the \texttt{corpkit} API]{Using \texttt{corpkit} find Epithets\slash Classifiers of health professionals in the Bipolar Forum Corpus}
 \label{fig:mod-of-doc}
 \end{figure}
 
@@ -486,16 +487,16 @@ Concordancing is the process of bringing up a vertically aligned set of query ma
 \begin{tabular}{lrll}
 
 \toprule
-     ASHEA-1 & i mention he has not seen this &  actual    &  doctor for at least 2 years .       \\
-  ASchwagz-1 &                  i have seen 3 &  different &  family doctors , 2 different psychi \\
-  ASchwagz-1 & 3 different family doctors , 2 &  different &  psychiatrists and 1 endocrinologist \\
-    Allibo-1 &   of course , when i called my &  primary   &  care dr. to prove the urologist wro \\
-   AllieTr-1 &                         find a &  good      &  doctor .                            \\
-    Althea-1 & thyroid meds , psychiatrist or &  other     &  doc ???                             \\
- AmySue902-1 &           through out the last &  few       &  years i have been diagnosed bd by a \\
- AmySue902-1 &  i have been diagnosed bd by a &  few       &  other doctors but have always refus \\
- AmySue902-1 & have been diagnosed bd by a few &  other    &  doctors but have always refused the \\
-     Angie-1 &                       i have a &  great     &  doctor that only charges me \$ 50 a  \\
+     ASHEA & i mention he has not seen this &  actual    &  doctor for at least 2 years .       \\
+  ASchwagz &                  i have seen 3 &  different &  family doctors , 2 different psychi \\
+  ASchwagz & 3 different family doctors , 2 &  different &  psychiatrists and 1 endocrinologist \\
+    Allibo &   of course , when i called my &  primary   &  care dr. to prove the urologist wro \\
+   AllieTr &                         find a &  good      &  doctor .                            \\
+    Althea & thyroid meds , psychiatrist or &  other     &  doc ???                             \\
+ AmySue902 &           through out the last &  few       &  years i have been diagnosed bd by a \\
+ AmySue902 &  i have been diagnosed bd by a &  few       &  other doctors but have always refus \\
+ AmySue902 & have been diagnosed bd by a few &  other    &  doctors but have always refused the \\
+     Angie &                       i have a &  great     &  doctor that only charges me \$ 50 a  \\
 \bottomrule
 \end{tabular}
 \caption{Concordancing adjectives modifying \emph{doctor}}
@@ -504,7 +505,7 @@ Concordancing is the process of bringing up a vertically aligned set of query ma
 
 \paragraph{\texttt{Interrogation.visualise()} method}
 
-Visualisation makes it possible to compress large amounts of complex numerical information into forms that aid in the recognition of patterns. Visualisation of linguistic data has two main purposes. First, it can be used to help the researcher to understand and interpret data. Second, it can be used to present result for readers. Most corpus tools require data to be exported and visualised in dedicated tools. This stifles the ability to use visualisation as a way to generate insights, prioritising only the use of visualisation to display data for readers. \texttt{corpkit}, on the other hand, contains an interface tailored specifically to the visualisation of linguistic data, via \emph{Matplotlib} \cite{matplotlib_2007}. Users can thus produce visualisations without leaving \texttt{corpkit}, making it possible to generate visualisations for both purposes.
+Visualisation makes it possible to compress large amounts of complex numerical information into forms that aid in the recognition of patterns. Visualisation of linguistic data has two main purposes. First, it can be used to help the researcher to understand and interpret data. Second, it can be used to present results to readers. Most corpus tools require data to be exported and visualised in dedicated tools. This stifles the ability to use visualisation as a way to generate insights, prioritising only the use of visualisation to display data for readers. \texttt{corpkit}, on the other hand, contains an interface tailored specifically to the visualisation of linguistic data, via \texttt{matplotlib} \cite{matplotlib_2007}. Users can thus produce visualisations without leaving \texttt{corpkit}, making it possible to generate visualisations for both purposes.
 
 The method allows bar charts, pie charts, line charts, area charts, and so on. Data can be stacked or shown cumulatively. The interface simplifies titling, axis labelling, legend placement, figure sizing, as well as the use of dozens of colours and styles. As used in Chapter \ref{chap:experiential}, heatmaps can also be created. These can be constant or diverging, and work with any kind of frequency (absolute, relative, keyness, etc.) that can be calculated with the tool.
 
@@ -541,7 +542,7 @@ In this kind of workflow, concordancer output is used both to get a sense of how
 
 \begin{figure}[H]
 \begin{minted}[linenos,frame=single,xleftmargin=1cm]{python}
-from dictionaries import processes, roles
+from corpkit.dictionaries import processes, roles
 # a list of verbal processes
 verbal = processes.verbal.lemmata
 # match nsubj of these processes as root
@@ -675,7 +676,7 @@ The tool also has broader uses beyond those showcased in this thesis. Language m
 
 \paragraph{Module dependencies}
 
-\texttt{corpkit} relies heavily on a number of other modules, the most important of which are outlined in Table \ref{tab:corpkit:deps}. Notably, \texttt{Stanford CoreNLP} is used to parse texts, and either \texttt{Tregex} or \texttt{nltk\_tgrep} can be used to query parse trees.\endnote{In this thesis, all constituency queries use \texttt{Tregex}, which has a richer syntax, and is faster.}
+\texttt{corpkit} relies heavily on a number of other modules, the most important of which are outlined in Table \ref{tab:corpkit:deps}. Notably, \texttt{Stanford CoreNLP} is used to parse texts, and either \texttt{Tregex} or \texttt{nltk\_tgrep} can be used to query parse trees.\endnote{In this thesis, all constituency queries use \texttt{Tregex}, which has a richer syntax, and is faster.} \texttt{pandas} is another key dependency, being used to store both parser output and search results.
 
 %\texttt{https://github.com/wroberts/nltk_tgrep}
 
@@ -745,12 +746,12 @@ The simplest of the three developed interfaces is the graphical interface, built
 
 \subsubsection{Interpreter}
 
-The second interface available is a natural language interpreter, which allows the user to type in imperative commands for \texttt{corpkit} to perform. It is reminiscent of the \gls{CWB}. Like the \gls{CWB}, it allows the user to search \glspl{corpus} and annotations in complex ways. The user can create macros and variables, export output, and write scripts that call the tool's functions and methods. It extends upon the functionality of the \gls{CWB} by allowing the user to search fully parsed, rather than \gls{POS}\slash lemmatised text.
+The other alternative interface is a natural language interpreter, which allows the user to type in imperative commands for \texttt{corpkit} to perform. It is reminiscent of the \gls{CWB}. Like the \gls{CWB}, it allows the user to search \glspl{corpus} and annotations in complex ways. The user can create macros and variables, export output, and write scripts that call the tool's functions and methods. It extends upon the functionality of the \gls{CWB} by allowing the user to search fully parsed, rather than \gls{POS}\slash lemmatised text.
 
 \begin{minted}[linenos,frame=single,xleftmargin=1cm,breaklines=true]{bash}
 > set bipolar as corpus
 > search corpus for governor-lemma matching processes:verbal \
-... excluding lemma matching [write, email, pen] \
+... excluding lemma matching "[write, email, pen]" \
 ... showing lemma and pos
 \end{minted}
 %
@@ -762,10 +763,10 @@ A key limitation in previously available \gls{CL} tools addressed by \texttt{cor
 
 \subsection{Contributions of the toolkit}
 
-The toolkit is a contribution to the \gls{CL} and \gls{SFL} communities, as well as the digital humanities more broadly. It expands on the functionality of many currently available tools, allowing more sophisticated kinds of querying and manipulation than other tools to date. As an example, by allowing the user to forgo reference \glspl{corpus} and stopword lists, its approach to keywording resolves tensions between theoretical orientation of critical\slash functional linguistics (which tend to problematise the notion of balanced\slash representative texts) and keywording (which typically relies on frequency data drawn from reference \glspl{corpus}). \texttt{corpkit} also brings tasks that have typically fallen under the domain of computational linguistics (e.g. lemmatisation, normalisation, parsing, linear regression modelling) to researchers interested in discourse. Despite the notable opposition to lemmatisation and parsing \textcite[by e.g.][]{sinclair_trust_2004}, such perspectives are now uncommon, with increasing recognition that computational methods can enhance the nuance with which the \gls{lexicogrammar} of texts can be probed, and thus the certainty with which claims about \glspl{discourse-semantic} of texts in \glspl{corpus} can be made. Looking at the tool from a computational linguistic perspective, it serves to bring state\hyp{}of\hyp{}the\hyp{}art developments to a new user base, including corpus linguists and discourse analysts. This addresses a problem articulated by \citeauthor[p.~1]{de2008stanford}:
+The toolkit is a contribution to the \gls{CL} and \gls{SFL} communities, as well as the digital humanities more broadly. It expands on the functionality of many currently available tools, allowing more sophisticated kinds of querying and manipulation than other tools to date. As an example, by allowing the user to forgo reference \glspl{corpus} and stopword lists, its approach to keywording resolves tensions between theoretical orientation of critical\slash functional linguistics (which tend to problematise the notion of balanced\slash representative texts) and keywording (which typically relies on frequency data drawn from reference \glspl{corpus}). \texttt{corpkit} also brings tasks that have typically fallen under the domain of computational linguistics (e.g. lemmatisation, normalisation, parsing, linear regression modelling) to researchers interested in discourse. Despite the notable opposition to lemmatisation and parsing \textcite[by e.g.][]{sinclair_trust_2004}, such perspectives are now uncommon, with increasing recognition that computational methods can enhance the nuance with which the \gls{lexicogrammar} of texts can be probed, and thus the certainty with which claims about \glspl{discourse-semantic} of texts in \glspl{corpus} can be made. Looking at the tool from a computational linguistic perspective, it serves to bring state\hyp{}of\hyp{}the\hyp{}art developments to a new user base, including corpus linguists and discourse analysts. This addresses a problem articulated by \citeauthor{de2008stanford}:
 
 \begin{quote} \singlespacing \small
-A major problem for the natural language processing (\gls{NLP}) community is how to make the very impressive and practical technology which has been developed over the last two decades approachable to and usable by everyone who has text understanding need \parencite*[p.~1]{de2008stanford}. \dots That is, usable not only by computational linguists, but also by the computer science community more generally and by all sorts of information professionals including biologists, medical researchers, political scientists, law firms, business and market analysts, etc. \dots [T]he availability of high quality, easy\hyp{}to\hyp{}use (and preferably free) tools is essential for driving broader use of \gls{NLP} tools.
+A major problem for the natural language processing (\gls{NLP}) community is how to make the very impressive and practical technology which has been developed over the last two decades approachable to and usable by everyone who has text understanding need. \dots~ That is, usable not only by computational linguists, but also by the computer science community more generally and by all sorts of information professionals including biologists, medical researchers, political scientists, law firms, business and market analysts, etc. \dots [T]he availability of high quality, easy\hyp{}to\hyp{}use (and preferably free) tools is essential for driving broader use of \gls{NLP} tools \parencite*[p.~1]{de2008stanford}.
 \end{quote}
 
 Finally, \texttt{corpkit} is aligned with the emerging areas of digital and programmatic humanities research. It increases transparency and reproducibility of methods and findings: \texttt{Jupyter Notebooks} can be kept under version control and easily shared with others; the graphical interface stores interrogations and edited results in memory during each session, and allows for saving and loading of generated data between sessions. In being free, open\hyp{}source and publicly available, it can be adapted by other researchers, simplifying the process of extending previous research and generating new theory.
@@ -790,7 +791,7 @@ Programmatic methods simplify and expedite the process of querying large dataset
 
 \subsection{\texttt{IPython} \& the \texttt{Jupyter Notebook}}
 
-\texttt{IPython} is an extension of the \texttt{Python} programming language, designed to allow quick access to Shell commands, to store code output to file and to easily access the output of previous commands \cite{perez2007ipython}. \texttt{Jupyter Notebooks} are web browser based displays of \texttt{IPython} code, as well as code output, headings, text, and multimedia. \texttt{Jupyter Notebooks} are increasingly popular within scientific communities, as they allow code to be contextualised and explained multimodally, and can be easily run by other researchers, ensuring reproducibility of results. Much of the corpus investigation took place via \texttt{IPython} and \texttt{Jupyter Notebooks}. Many key findings from the investigation in this thesis are therefore available in Notebooks available at: \\ \texttt{\href{https://github.com/interrogator/thesis}{https://github.com/interrogator/thesis}} \\ This Notebook presents methodological processes and code in more depth, and can be used to manipulate the \gls{corpus}, and edit findings and results.
+\texttt{IPython} is an extension of the Python programming language, designed to allow quick access to Shell commands, to store code output to file and to easily access the output of previous commands \cite{perez2007ipython}. \texttt{Jupyter Notebooks} are web browser based displays of \texttt{IPython} code, as well as code output, headings, text, and multimedia. \texttt{Jupyter Notebooks} are increasingly popular within scientific communities, as they allow code to be contextualised and explained multimodally, and can be easily run by other researchers, ensuring reproducibility of results. Much of the corpus investigation took place via \texttt{IPython} and \texttt{Jupyter Notebooks}. Many key findings from the investigation in this thesis are therefore available in Notebooks available at: \texttt{\href{https://github.com/interrogator/thesis}{https://github.com/interrogator/thesis}}. This Notebook presents methodological processes and code in more depth, and can be used to manipulate the \gls{corpus}, and edit findings and results.
 
 \subsection{Limitations}
 
@@ -806,7 +807,7 @@ Finally, the methodology is limited to querying the annotated data, and manipula
 
 \section{Situating the thesis methodology}
 
-The methods outlined here incorporate components from a number of convergent fields of study, such as text mining, \glslink{CL}{corpus linguistics}, computational linguistics, and the digital humanities. There is no clear line delineating where one of these fields ends and another begins. There is, however, a tendency for digital humanities and \gls{CL} to focus on interpreting specific datasets, while text mining and computational linguistics are primarily interested in the development of tools. A mixed emphasis on methodological innovation and data analysis means that the case study straddles a broad interdisciplinary space. For discourse analysts and corpus linguists, the methods present a means of engaging in well\hyp{}established computational linguistic practices, that can assist with automating work that has previously been possible only through manual analysis. At the same time, text mining and computational linguistics are often concerned with extracting entities and entity relationships, with little consideration of grammatical metaphor, or theories of language and grammar more generally. The developed method thus aims to combine the speed and automation of text mining approaches with the grammatical sensitivity seen in qualitative research. This opens up future research agendas that integrate discourse analysis and state\hyp{}of\hyp{}the\hyp{}art computational linguistic methods.
+The methods outlined here incorporate components from a number of convergent fields of study, such as text mining, \glslink{CL}{corpus linguistics}, computational linguistics, and the digital humanities. There is no clear line delineating where one of these fields ends and another begins. There is, however, a tendency for digital humanities and \gls{CL} to focus on interpreting specific datasets, while text mining and computational linguistics are primarily interested in the development of tools. A mixed emphasis on methodological innovation and data analysis means that the case study straddles a broad interdisciplinary space. For discourse analysts and corpus linguists, the methods present new ways to engage with well\hyp{}established computational linguistic practices and tools, allowing automatation of work that has previously been possible only through manual analysis. At the same time, text mining and computational linguistics are often concerned with extracting entities and entity relationships, with little consideration of grammatical metaphor, or theories of language and grammar more generally. The developed method thus aims to combine the speed and automation of text mining approaches with the grammatical sensitivity seen in qualitative research. This opens up future research agendas that integrate discourse analysis and state\hyp{}of\hyp{}the\hyp{}art computational linguistic methods.
 
 \section{Chapter summary}
 

@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt,abstract=on]{scrreprt}
+\documentclass[a4paper,10pt,openright,abstract=on]{scrreprt}
 \addtokomafont{disposition}{\bfseries \merriweather}
 \usepackage[UKenglish]{babel}
 %\usepackage{fullpage} % narrow margins
@@ -218,7 +218,9 @@
 % stops a koma error related to the toc:
 \usepackage[float=false]{scrhack}
 
-\begin{document} 
+\begin{document}
+
+\renewcommand{\arraystretch}{1.35}
 
 \pagenumbering{roman}
 
@@ -277,7 +279,7 @@ This thesis contains only original work by the writer, except for the references
 \doublespacing
 \section*{Acknowledgements}
 
-Thanks to those who made this work possible, including supervisors, colleagues, family and friends. Funding for this research was provided by the Australian Commonwealth Government, the University of Melbourne, SFB 1102, and the Hong Kong Polytechnic University.
+Thanks to those who made this work possible, including supervisors, colleagues, family and friends. Funding for this research was provided by the Australian Commonwealth Government, the University of Melbourne, the German Research Foundation, and the Hong Kong Polytechnic University.
 
 % should change to SFB?
 

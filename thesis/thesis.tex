@@ -51,7 +51,7 @@
 \usepackage{morefloats}
 \usepackage{minted}
 \usepackage{etoolbox}
-\AtBeginEnvironment{minted}{\onehalfspacing%
+\AtBeginEnvironment{minted}{\onehalfspacing
     \fontsize{9}{9}\selectfont}
 \renewcommand{\MintedPygmentize}{/usr/local/bin/pygmentize}
 
@@ -357,7 +357,7 @@ The thesis has implications for corpus linguistics, systemic\hyp{}functional lin
   \hspace{2cm}\begin{longtable}{lp{28em}p{4em}}}%
   {\end{longtable}}%
 }
-
+\renewcommand{\arraystretch}{1}
 \renewcommand*{\acronymname}{List of abbreviations}
 \printglossary[type=acronym,style=customlong3col,nogroupskip]
 
